@@ -65,7 +65,7 @@ public class DAOTest {
         Soggetti soggetto = new Soggetti();
 
         soggetto.setCognome("cognome1");
-        soggetto.setEmail("email1@gmail.com");
+        soggetto.setMail("email1@gmail.com");
         soggetto.setNome("nome1");
         soggetto.setUsername("username1");
         soggetto.setRagioneSociale("azienda1");
@@ -104,7 +104,7 @@ public class DAOTest {
             log.error("Errore nella ricerca del soggetto", e1);
         }
 
-        soggetto.setEmail("utente07@gmail.com");
+        soggetto.setMail("utente07@gmail.com");
 
         try {
             sogDAO.update(soggetto);
@@ -122,7 +122,7 @@ public class DAOTest {
 
         if (list != null && !list.isEmpty()) {
             Soggetti sog2 = list.get(0);
-            sog2.setEmail("utente07@gmail.com");
+            sog2.setMail("utente07@gmail.com");
             try {
                 sogDAO.update(sog2);
             } catch (DAOStoreException e) {

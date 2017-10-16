@@ -31,10 +31,10 @@ public class Oggetti {
 	public Integer id;
 		
 	@ManyToOne
-	@JoinColumn(name="propretario")
+	@JoinColumn(name="proprietario")
 	@QgSearchField
 	@QgEditField(editFieldType = SearchFieldType.POPUP_SEARCH_FIELD)
-	@QgLabel(label = "Propretario", description ="Username del propretario dell'oggetto")
+	@QgLabel(label = "Proprietario", description ="Username del proprietario dell'oggetto")
 	public Soggetti soggetti;
 	
 	@QgSearchField

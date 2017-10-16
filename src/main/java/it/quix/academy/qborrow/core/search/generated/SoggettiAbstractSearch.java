@@ -22,7 +22,7 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
 
     private String username;
 
-    private String email;
+    private String mail;
 
     private String ragioneSociale;
 
@@ -44,7 +44,7 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
 
     public void clearFilter() {
         username = null;
-        email = null;
+        mail = null;
         ragioneSociale = null;
         nome = null;
         cognome = null;
@@ -57,7 +57,7 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
         SoggettiSearch search = new SoggettiSearch();
 
         search.setUsername(username);
-        search.setEmail(email);
+        search.setMail(mail);
         search.setRagioneSociale(ragioneSociale);
         search.setNome(nome);
         search.setCognome(cognome);
@@ -102,11 +102,11 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
         } else if (!username.equals(other.getUsername())) {
             return false;
         }
-        if (email == null) {
-            if (other.getEmail() != null) {
+        if (mail == null) {
+            if (other.getMail() != null) {
                 return false;
             }
-        } else if (!email.equals(other.getEmail())) {
+        } else if (!mail.equals(other.getMail())) {
             return false;
         }
         if (ragioneSociale == null) {
@@ -176,7 +176,7 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
         int result = 1;
 
         result = prime * result + ((username == null) ? 0 : username.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((mail == null) ? 0 : mail.hashCode());
         result = prime * result + ((ragioneSociale == null) ? 0 : ragioneSociale.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
@@ -200,7 +200,7 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
         sb.append(this.getClass().getName());
         sb.append("(");
         sb.append("username=").append(username);
-        sb.append(", ").append("email=").append(email);
+        sb.append(", ").append("mail=").append(mail);
         sb.append(", ").append("ragioneSociale=").append(ragioneSociale);
         sb.append(", ").append("nome=").append(nome);
         sb.append(", ").append("cognome=").append(cognome);
@@ -231,16 +231,16 @@ public class SoggettiAbstractSearch extends AbstractSearchModel {
      * @return the email
      * @see SoggettiSearch#email
      */
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
     /**
      * @param email the email to set
      * @see SoggettiSearch#email
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     /**

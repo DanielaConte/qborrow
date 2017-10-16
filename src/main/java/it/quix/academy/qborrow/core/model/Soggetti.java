@@ -87,7 +87,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
      */
     @Column(length = 100, nullable = false)
     @QrExcelColumn(order = 0)
-    private String email;
+    private String mail;
 
     /**
      * Ragione Sociale <br>
@@ -159,7 +159,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
 
     /**
 	 */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "propretario")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
     @QrExcelColumn(order = 0)
     private Set<Oggetti> oggetti;
 
@@ -254,7 +254,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
 
         sb.append(", ").append("username=").append(username);
 
-        sb.append(", ").append("email=").append(email);
+        sb.append(", ").append("mail=").append(mail);
 
         sb.append(", ").append("ragioneSociale=").append(ragioneSociale);
 
@@ -373,8 +373,8 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
      * @see Soggetti.email
      */
 
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
     /**
@@ -389,8 +389,8 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
      * @param email the Email to set
      * @see Soggetti.email
      */
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     /**

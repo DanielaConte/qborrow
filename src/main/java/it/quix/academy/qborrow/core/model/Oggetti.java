@@ -143,16 +143,16 @@ public class Oggetti extends QborrowAbstractModel implements Serializable {
     private Date dataUltimaModifica;
 
     /**
-     * Propretario <br>
-     * Username del propretario dell'oggetto <br>
+     * Proprietario <br>
+     * Username del proprietario dell'oggetto <br>
      * Property of field:
      * <ul>
-     * <li>columnName = propretario
+     * <li>columnName = proprietario
      * <li>nullable = true
      * </ul>
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "propretario")
+    @JoinColumn(name = "proprietario")
     private Soggetti soggetti;
 
     @Transient
@@ -539,11 +539,11 @@ public class Oggetti extends QborrowAbstractModel implements Serializable {
     }
 
     /**
-     * Return the Propretario
-     * Username del propretario dell'oggetto <br>
+     * Return the Proprietario
+     * Username del proprietario dell'oggetto <br>
      * Property of field:
      * <ul>
-     * <li>columnName = propretario
+     * <li>columnName = proprietario
      * <li>nullable = true
      * </ul>
      * 
@@ -564,15 +564,15 @@ public class Oggetti extends QborrowAbstractModel implements Serializable {
     }
 
     /**
-     * Set the Propretario
-     * Username del propretario dell'oggetto <br>
+     * Set the Proprietario
+     * Username del proprietario dell'oggetto <br>
      * Property of field:
      * <ul>
-     * <li>columnName = propretario
+     * <li>columnName = proprietario
      * <li>nullable = true
      * </ul>
      * 
-     * @param soggetti the Propretario to set
+     * @param soggetti the Proprietario to set
      * @see Oggetti.soggetti
      */
     public void setSoggetti(Soggetti soggetti) {

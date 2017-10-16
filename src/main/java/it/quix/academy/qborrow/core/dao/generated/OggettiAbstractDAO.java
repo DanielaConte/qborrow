@@ -62,7 +62,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the insert query
             StringBuilder query = new StringBuilder(EOL);
             query.append("INSERT INTO oggetti ").append(EOL);
-            query.append("   (ID, TITOLO, DESCRIZIONE, IMMAGINE, CATEGORIA, DATA_ULTIMA_MODIFICA, PROPRETARIO) ").append(EOL);
+            query.append("   (ID, TITOLO, DESCRIZIONE, IMMAGINE, CATEGORIA, DATA_ULTIMA_MODIFICA, PROPRIETARIO) ").append(EOL);
             query.append(" VALUES ").append(EOL);
             query.append(" (?, ?, ?, ?, ?, ?, ?) ").append(EOL);
 
@@ -129,7 +129,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE oggetti SET ").append(EOL);
-            query.append(" titolo = ? , descrizione = ? , immagine = ? , categoria = ? , data_ultima_modifica = ? , propretario = ?  ").append(EOL);
+            query.append(" titolo = ? , descrizione = ? , immagine = ? , categoria = ? , data_ultima_modifica = ? , proprietario = ?  ").append(EOL);
             query.append("  WHERE id = ? ").append(EOL);
 
             // Query logging
@@ -350,7 +350,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
         oggetti.setJdbc(true);
         oggetti.setQborrowManager(qborrowManager);
 
-        oggetti.setSoggetti_username(getParameterString(rs, "propretario"));
+        oggetti.setSoggetti_username(getParameterString(rs, "proprietario"));
         oggetti.setId(getParameterInteger(rs, "id"));
         oggetti.setTitolo(getParameterString(rs, "titolo"));
         oggetti.setDescrizione(getParameterString(rs, "descrizione"));
@@ -434,7 +434,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the select query
             StringBuilder query = new StringBuilder(EOL);
             query.append("SELECT * FROM oggetti ").append(EOL);
-            query.append("WHERE propretario = ?  ").append(EOL);
+            query.append("WHERE proprietario = ?  ").append(EOL);
             // Query logging
             if (queryLog.isInfoEnabled()) {
                 queryLog.info(query);
@@ -487,7 +487,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the select query
             StringBuilder query = new StringBuilder(EOL);
             query.append("DELETE FROM oggetti ").append(EOL);
-            query.append("WHERE propretario = ?  ").append(EOL);
+            query.append("WHERE proprietario = ?  ").append(EOL);
             // Query logging
             if (queryLog.isInfoEnabled()) {
                 queryLog.info(query);
@@ -699,12 +699,12 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             p++;
         }
         if (search.getSoggetti() != null) {
-            whereClause.append("AND propretario = ?  ");
+            whereClause.append("AND proprietario = ?  ");
             parameters.put(new Integer(p), search.getSoggetti().getUsername());
             p++;
         } else {
             if (search.getSoggetti_username() != null) {
-                whereClause.append("AND propretario = ? ");
+                whereClause.append("AND proprietario = ? ");
                 parameters.put(new Integer(p), search.getSoggetti_username());
                 p++;
             }

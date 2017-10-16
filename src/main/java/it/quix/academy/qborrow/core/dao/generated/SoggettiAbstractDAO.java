@@ -62,7 +62,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the insert query
             StringBuilder query = new StringBuilder(EOL);
             query.append("INSERT INTO soggetti ").append(EOL);
-            query.append("   (USERNAME, EMAIL, RAGIONE_SOCIALE, NOME, COGNOME, IMMAGINE, DATA_ULTIMA_MODIFICA) ").append(EOL);
+            query.append("   (USERNAME, MAIL, RAGIONE_SOCIALE, NOME, COGNOME, IMMAGINE, DATA_ULTIMA_MODIFICA) ").append(EOL);
             query.append(" VALUES ").append(EOL);
             query.append(" (?, ?, ?, ?, ?, ?, ?) ").append(EOL);
 
@@ -79,7 +79,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Set the parameters
             int p = 1;
             super.setParameterString(statement, p++, soggetti.getUsername());
-            super.setParameterString(statement, p++, soggetti.getEmail());
+            super.setParameterString(statement, p++, soggetti.getMail());
             super.setParameterString(statement, p++, soggetti.getRagioneSociale());
             super.setParameterString(statement, p++, soggetti.getNome());
             super.setParameterString(statement, p++, soggetti.getCognome());
@@ -129,7 +129,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE soggetti SET ").append(EOL);
-            query.append(" email = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ?  ").append(EOL);
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ?  ").append(EOL);
             query.append("  WHERE username = ? ").append(EOL);
 
             // Query logging
@@ -146,7 +146,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
 
             // Set the parameters
             int p = 1;
-            super.setParameterString(statement, p++, soggetti.getEmail());
+            super.setParameterString(statement, p++, soggetti.getMail());
             super.setParameterString(statement, p++, soggetti.getRagioneSociale());
             super.setParameterString(statement, p++, soggetti.getNome());
             super.setParameterString(statement, p++, soggetti.getCognome());
@@ -198,9 +198,9 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             return true;
         if (oldSoggetti.getUsername() == null && newSoggetti.getUsername() != null)
             return true;
-        if (oldSoggetti.getEmail() != null && !oldSoggetti.getEmail().equals(newSoggetti.getEmail()))
+        if (oldSoggetti.getMail() != null && !oldSoggetti.getMail().equals(newSoggetti.getMail()))
             return true;
-        if (oldSoggetti.getEmail() == null && newSoggetti.getEmail() != null)
+        if (oldSoggetti.getMail() == null && newSoggetti.getMail() != null)
             return true;
         if (oldSoggetti.getRagioneSociale() != null && !oldSoggetti.getRagioneSociale().equals(newSoggetti.getRagioneSociale()))
             return true;
@@ -258,7 +258,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
 
         newSoggetti.setQborrowManager(soggetti.getQborrowManager());
         newSoggetti.setUsername(soggetti.getUsername());
-        newSoggetti.setEmail(soggetti.getEmail());
+        newSoggetti.setMail(soggetti.getMail());
         newSoggetti.setRagioneSociale(soggetti.getRagioneSociale());
         newSoggetti.setNome(soggetti.getNome());
         newSoggetti.setCognome(soggetti.getCognome());
@@ -351,7 +351,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
         soggetti.setQborrowManager(qborrowManager);
 
         soggetti.setUsername(getParameterString(rs, "username"));
-        soggetti.setEmail(getParameterString(rs, "email"));
+        soggetti.setMail(getParameterString(rs, "mail"));
         soggetti.setRagioneSociale(getParameterString(rs, "ragione_sociale"));
         soggetti.setNome(getParameterString(rs, "nome"));
         soggetti.setCognome(getParameterString(rs, "cognome"));
@@ -557,9 +557,9 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             p++;
         }
 
-        if (StringUtils.isNotEmpty(search.getEmail())) {
-            whereClause.append("AND email  LIKE ? ");
-            parameters.put(new Integer(p), "%" + search.getEmail() + "%");
+        if (StringUtils.isNotEmpty(search.getMail())) {
+            whereClause.append("AND mail  LIKE ? ");
+            parameters.put(new Integer(p), "%" + search.getMail() + "%");
             p++;
         }
         if (StringUtils.isNotEmpty(search.getRagioneSociale())) {

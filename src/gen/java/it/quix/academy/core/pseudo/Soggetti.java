@@ -28,11 +28,11 @@ public class Soggetti {
 	@QgListColumnField
 	public String username;
 	
-	@QgLabel(label = "Email", description ="Email dell'utente")
+	@QgLabel(label = "Mail", description ="Email dell'utente")
 	@QgSearchField
 	@Column(length = 100, nullable = false)
 	@QgListColumnField
-	public String email;
+	public String mail;
 	
 	@Column(name = "ragione_sociale", length = 255)
 	@QgLabel(label = "Ragione Sociale", description ="Ragione Sociale dell'utente")

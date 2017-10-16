@@ -13,7 +13,7 @@
 		<constructor-arg ref="qborrowDataSource" ></constructor-arg>
 	</bean>
 	
-	<bean id="soggettiDAO" class="it.quix.academy.qborrow.core.dao.SoggettiDAO" >
+	<bean id="soggettiDAO" class="it.quix.academy.qborrow.core.dao.SoggettiDAO"  init-method="init">
 		<constructor-arg ref="qborrowDataSource" ></constructor-arg>
 	</bean>
 	

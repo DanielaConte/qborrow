@@ -14,6 +14,16 @@ qborrowApp.controller('qxOggettiController', ['$scope', 'qxQborrowHttpService', 
 		$scope.list();
 	}
 	
+	
+	$scope.searchMieiOggetti = function () {
+		$scope.scopeController.search.order = 0;
+		$scope.scopeController.search.page = 1;
+		$scope.listMieiOggetti();
+	}
+	
+	
+	
+	
 	$scope.orderBy = function(orderBy) {
 		$scope.scopeController.search.order = orderBy;
 		$scope.scopeController.search.page = 1;
@@ -32,6 +42,12 @@ qborrowApp.controller('qxOggettiController', ['$scope', 'qxQborrowHttpService', 
 	$scope.list = function () {
 		qxQborrowHttpService.getOggettiList($scope.scopeController, $scope.forms.oggettiListForm);
 	}
+	
+	$scope.listMieiOggetti = function () {
+		qxQborrowHttpService.getMieiOggettiList($scope.scopeController, $scope.forms.oggettiListForm);
+	}
+	
+	
 	
 	$scope.edit = function(row){
 		$scope.scopeController.selectedRow = row;
@@ -84,7 +100,7 @@ qborrowApp.controller('qxOggettiController', ['$scope', 'qxQborrowHttpService', 
 		qxQborrowHttpService.getCombo($scope.scopeController, name);
 	}
 	
-	$scope.list();
+//	$scope.list();
 	
     $scope.initCalendar = function(obj, id) {
     	if ( $('#' + id)[0].type != 'date' )  {

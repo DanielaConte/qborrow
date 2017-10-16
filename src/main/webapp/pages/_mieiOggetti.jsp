@@ -2,7 +2,9 @@
 <%@ taglib prefix="qs2" uri="/quix-strut2-tags" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<form name="forms.oggettiListForm" novalidate>
+
+
+<form name="forms.oggettiListForm" novalidate ng-init="listMieiOggetti();" >
 	<div class="box box-framework">
 		<div class="box-header with-border">
 			<div class="qrow" style="margin: 1px 10px 10px 6px;display: inline-block;" ng-cloak>
@@ -93,6 +95,14 @@
 				</div>
 			</div>
 			<div class="qrow">
+				<div class="qcol-xs-12 qcol-sm-12 qcol-md-6" ng-class="{'qhas-error': forms.oggettiListForm.isInPrestito.$invalid}">
+					<label for="isInPrestito"><s:text name="oggetti.search.isInPrestito"/>:</label>
+					<select id="isInPrestito" name="isInPrestito"  class="qform-control" ng-model="scopeController.search.isInPrestito">
+						<option></option>
+						<option value="true">In Prestito</option>
+						<option  value="false">Non In Prestito</option>
+					</select>
+				</div>
 				<div class="qcol-xs-12 qcol-sm-12 qcol-md-6" ng-class="{'qhas-error': forms.oggettiListForm.categoria.$invalid}">
 					<label for="categoria"><s:text name="oggetti.search.categoria"/>:</label>
 					<div>
@@ -159,7 +169,7 @@
 			</div>	                		
 		</div>
 		<div class="box-footer qtext-center" ng-show="filtriEspansi">
-			<button ng-click="filtriEspansi = false;search();" class="qbtn btn-framework-color"><i class="fa fa-search"></i>&nbsp;<s:text name="button.search"/></button>
+			<button ng-click="filtriEspansi = false;searchMieiOggetti();" class="qbtn btn-framework-color"><i class="fa fa-search"></i>&nbsp;<s:text name="button.search"/></button>
 			<button ng-click="resetSearch()" class="qbtn btn-framework-color"><i class="fa fa-undo"></i>&nbsp;<s:text name="button.reset"/></button>
 		</div>
 	</div>
@@ -205,23 +215,29 @@
     	<table class="qtable qtable-hover">
 			<thead>
 				<tr>
-					<th class="qtext-right"><s:text name="oggetti.list.id"/></th>
 					<th class="qtext-left"><s:text name="oggetti.list.titolo"/></th>
 					<th class="qtext-left"><s:text name="oggetti.list.descrizione"/></th>
-					<th class="qtext-left"><s:text name="oggetti.list.immagine"/></th>
 					<th class="qtext-left"><s:text name="oggetti.list.categoria"/></th>
-					<th class="qtext-center"><s:text name="oggetti.list.dataUltimaModifica"/></th>
+					<th class="qtext-left"><s:text name="oggetti.list.inPrestito"/></th>
+					<th class="qtext-left"><s:text name="oggetti.list.beneficiario"/></th>
+					<th class="qtext-left"><s:text name="oggetti.list.dataScadenza"/></th>
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in scopeController.result.list">
-					<td class="qtext-right" nowrap="nowrap">{{ row.id }}</td>
+					
 					<td>{{ row.titolo }}</td>
 					<td>{{ row.descrizione }}</td>
-					<td>{{ row.immagine }}</td>
 					<td>{{ row.categoria | sysattribute:'qbo0001_categoria' }}</td>
-					<td class="qtext-center" nowrap="nowrap">{{ row.dataUltimaModifica  | date:"<s:text name="format.date3" />" }}</td>
+					<td ng-if="row.oggettoPrestato == true">
+						<i class="fa fa-check qtext-success" aria-hidden="true"></i>
+					</td>
+					<td ng-if="row.oggettoPrestato == false">
+						<i class="fa fa-times qtext-danger" aria-hidden="true"></i>
+					</td>
+					<td>{{ row.prestito.soggetti.nome }} {{ row.prestito.soggetti.cognome  }}</td>
+					<td> {{ row.prestito.scadenzaPrestito | date:"<s:text name="format.date4"/>" }}</td>
 					<td class="qtext-right">
 						<div class="qbtn-group" ng-hide="popup">
 		                  	<button class="qbtn btn-framework-color" ng-click="edit(row)" type="button"><i class="fa fa-pencil"></i>&nbsp;<s:text name="button.edit" /></button>

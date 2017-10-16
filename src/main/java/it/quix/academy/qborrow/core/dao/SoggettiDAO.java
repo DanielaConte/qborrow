@@ -23,4 +23,8 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
         }
     }
 
+    public void init() {
+        log.info("SoggettoDAO initialized custom");
+    }
+
 }

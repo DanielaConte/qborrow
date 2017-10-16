@@ -1,13 +1,10 @@
 package it.quix.academy.qborrow;
 
-import it.quix.framework.core.manager.ManagerHolder;
-import it.quix.framework.core.model.UserContextHolder;
+import it.quix.academy.qborrow.core.mail.MailServiceCustom;
 import it.quix.academy.qborrow.core.model.QborrowUserContext;
+import it.quix.framework.core.manager.ManagerHolder;
 
 import java.util.Arrays;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import junit.framework.Assert;
 
@@ -15,19 +12,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-/**
- * BaseTest for jUnit tests.<br>
- * All jUnit classes should inherit from this class.
- * 
- * @author Quix CodeGenerator version 03.03.00-SNAPSHOT
- */
-public class BaseTest {
+public class mailTest {
 
-    private static Log log = LogFactory.getLog(BaseTest.class);
+    private static Log log = LogFactory.getLog(mailTest.class);
 
     protected static ApplicationContext applicationContext;
 
@@ -55,4 +46,13 @@ public class BaseTest {
         applicationContext = null;
     }
 
+    @Test
+    public void simpleMail() {
+        log.info("SimpleMail -  Start");
+
+        MailServiceCustom mail = applicationContext.getBean(MailServiceCustom.class);
+        mail.sendEmail("matteo.renzi@quix.it", "Prova Spring", "Ciao");
+
+        log.info("SimpleMail -  End");
+    }
 }

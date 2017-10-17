@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.qborrow.org/test" xmlns:tns="http://www.qborrow.org/test" elementFormDefault="qualified">
+
+    <complexType name="soggetto">
+    	<sequence>
+    		<element name="username" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="mail" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="ragioneSociale" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="nome" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="cognome" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="immagine" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="dataUltimaModifica" type="date" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+
+    <element name="soggetto" type="tns:soggetto"></element>
+    
+    <complexType name="oggetto">
+    	<sequence>
+    		<element name="id" type="int" maxOccurs="1" minOccurs="1"></element>
+    		<element name="proprietario" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="titolo" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="descrizione" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="immagine" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="categoria" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="dataUltimaModifica" type="date" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <element name="oggetto" type="tns:oggetto"></element>
+    
+    <complexType name="prestiti">
+    	<sequence>
+    		<element name="beneficiario" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="oggettoPrestato" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="dataPrestitio" type="date" maxOccurs="1" minOccurs="0"></element>
+    		<element name="dataScadenza" type="date" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <element name="prestiti" type="tns:prestiti"></element>
+
+    <complexType name="qborrow">
+    	<sequence>
+    		<element name="oggetto" type="tns:oggetto" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="soggetto" type="tns:soggetto" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="prestito" type="tns:prestiti" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <element name="qborrow" type="tns:qborrow"></element>
+</schema>

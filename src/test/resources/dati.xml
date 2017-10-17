@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:qborrow xmlns:tns="http://www.qborrow.org/test" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.qborrow.org/test test.xsd">
+	
+	<tns:oggetto>
+		<tns:id>25</tns:id>
+		<tns:proprietario>utente</tns:proprietario>
+		<tns:titolo>raccoglitore</tns:titolo>
+		<tns:immagine>percorso23</tns:immagine>
+		<tns:categoria>Ufficio</tns:categoria>
+		<tns:dataUltimaModifica>2017-10-16</tns:dataUltimaModifica>
+	</tns:oggetto>
+	
+	<tns:soggetto>
+		<tns:username>daniela</tns:username>
+		<tns:mail>daniela@gmail.com</tns:mail>
+		<tns:ragioneSociale>nd</tns:ragioneSociale>
+		<tns:nome>Daniela</tns:nome>
+		<tns:cognome>Conte</tns:cognome>
+		<tns:immagine>C:\\percorsoFake</tns:immagine>
+		<tns:dataUltimaModifica>2017-10-12</tns:dataUltimaModifica>
+	</tns:soggetto>
+	
+</tns:qborrow>

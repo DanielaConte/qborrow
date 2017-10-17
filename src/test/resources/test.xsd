@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.qborrow.org/test" xmlns:tns="http://www.qborrow.org/test" elementFormDefault="qualified">
 
-    <complexType name="soggetto">
+    <complexType name="soggetti">
     	<sequence>
     		<element name="username" type="string" maxOccurs="1" minOccurs="1"></element>
     		<element name="mail" type="string" maxOccurs="1" minOccurs="0"></element>
@@ -14,9 +14,9 @@
     </complexType>
     
 
-    <element name="soggetto" type="tns:soggetto"></element>
+    <element name="soggetto" type="tns:soggetti"></element>
     
-    <complexType name="oggetto">
+    <complexType name="oggetti">
     	<sequence>
     		<element name="id" type="int" maxOccurs="1" minOccurs="1"></element>
     		<element name="proprietario" type="string" maxOccurs="1" minOccurs="0"></element>
@@ -30,7 +30,7 @@
     	</sequence>
     </complexType>
 
-    <element name="oggetto" type="tns:oggetto"></element>
+    <element name="oggetto" type="tns:oggetti"></element>
     
     <complexType name="prestiti">
     	<sequence>
@@ -45,10 +45,10 @@
 
     <complexType name="qborrow">
     	<sequence>
-    		<element name="oggetto" type="tns:oggetto" maxOccurs="1"
+    		<element name="oggetto" type="tns:oggetti" maxOccurs="1"
     			minOccurs="1">
     		</element>
-    		<element name="soggetto" type="tns:soggetto" maxOccurs="1"
+    		<element name="soggetto" type="tns:soggetti" maxOccurs="1"
     			minOccurs="1">
     		</element>
     		<element name="prestito" type="tns:prestiti" maxOccurs="1"

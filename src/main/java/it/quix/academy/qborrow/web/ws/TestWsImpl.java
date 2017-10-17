@@ -11,4 +11,3 @@ public class TestWsImpl implements TestWs {
     }
 
 }
- 

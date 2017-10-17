@@ -2,12 +2,13 @@ package it.quix.academy.qborrow.web.ws;
 
 import javax.jws.WebService;
 
-@WebService(endpointInterface="it.quix.academy.qborrow.web.ws.TestWs")
-public class TestWsImpl implements TestWs{
+@WebService(endpointInterface = "it.quix.academy.qborrow.web.ws.TestWs")
+public class TestWsImpl implements TestWs {
 
-	public String getResponse(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getResponse(String name) {
+        // TODO Auto-generated method stub
+        return name;
+    }
 
 }
+ 

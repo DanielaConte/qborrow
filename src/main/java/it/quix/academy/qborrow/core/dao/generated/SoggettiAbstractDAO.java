@@ -129,8 +129,8 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE soggetti SET ").append(EOL);
-            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ?  ").append(EOL);
-            query.append("  WHERE username = ? ").append(EOL);
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?").append(EOL);
+            query.append("  WHERE username = ? AND year((data_compleanno)%2)=0").append(EOL); //aggiorno se l'anno è pari
 
             // Query logging
             if (queryLog.isInfoEnabled()) {
@@ -152,6 +152,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             super.setParameterString(statement, p++, soggetti.getCognome());
             super.setParameterString(statement, p++, soggetti.getImmagine());
             super.setParameterDate(statement, p++, soggetti.getDataUltimaModifica());
+            super.setParameterDate(statement, p++, soggetti.getDataCompleanno());
 
             // Set the primary key
             super.setParameterString(statement, p++, soggetti.getUsername());

@@ -156,6 +156,20 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
     @Column(length = 50, name = "data_ultima_modifica", nullable = false)
     @QrExcelColumn(order = 0)
     private Date dataUltimaModifica;
+    
+    /**
+     * Property of field:
+     * <ul>
+     * <li>length = 50
+     * <li>columnName = data_compleanno
+     * <li>nullable = false
+     * </ul>
+     */
+    @QcDateType()
+    @Temporal(TemporalType.DATE)
+    @Column(length = 50, name = "data_compleanno", nullable = false)
+    @QrExcelColumn(order = 0)
+    private Date dataCompleanno;
 
     /**
 	 */
@@ -265,6 +279,8 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
         sb.append(", ").append("immagine=").append(immagine);
 
         sb.append(", ").append("dataUltimaModifica=").append(dataUltimaModifica);
+        
+        sb.append(", ").append("dataCompleanno= ").append(dataCompleanno);
 
         sb.append(", ").append("oggetti=").append(oggetti);
 
@@ -549,7 +565,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
      * Property of field:
      * <ul>
      * <li>length = 50
-     * <li>columnName = data_ultima_modifica
+     * <li>columnName = data_compleanno
      * <li>nullable = false
      * </ul>
      * 
@@ -558,6 +574,26 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
      */
     public void setDataUltimaModifica(Date dataUltimaModifica) {
         this.dataUltimaModifica = dataUltimaModifica;
+    }
+    
+    public Date getDataCompleanno() {
+        return dataCompleanno;
+    }
+
+    /**
+     * <br>
+     * Property of field:
+     * <ul>
+     * <li>length = 50
+     * <li>columnName = data_compleanno
+     * <li>nullable = false
+     * </ul>
+     * 
+     * @param dataUltimaModifica
+     * @see Soggetti.dataUltimaModifica
+     */
+    public void setDataCompleanno(Date dataCompleanno) {
+        this.dataCompleanno = dataCompleanno;
     }
 
     /**

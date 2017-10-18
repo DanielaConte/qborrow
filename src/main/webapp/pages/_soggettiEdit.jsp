@@ -183,6 +183,8 @@
 					  	<div ng-message="notNull"><s:text name="error.notNull"/></div>
 					  	<div ng-message="invalidAK"><s:text name="error.invalidAK"/></div>
 					  	<div ng-message="notValid"><s:text name="error.notValid"/></div>
+					  	<div ng-message="minorenne"><s:text name="error.minorenne"/></div>
+					  	<div ng-message="nonNato"><s:text name="error.nonNato"/></div>
 					  	<div ng-message="lenght"><s:text name="error.lenght"/></div>
 					  	<div ng-message="dateToBeforeDateFrom"><s:text name="error.dateToBeforeDateFrom"/></div>
 					  	<div ng-message="fieldToBeforeFieldFrom"><s:text name="error.fieldToBeforeFieldFrom"/></div>
@@ -199,8 +201,7 @@
 			</div>
 		</div>
 		<div class="box-footer qtext-center">
-			<button ng-click="save()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
-			<button ng-click="saveCompleanno()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
+			<button ng-click="saveWithCompleanno()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
 			<button ng-click="back()" class="qbtn btn-framework-color"><i class="fa fa-arrow-circle-left"></i>&nbsp;<s:text name="button.back"/></button>
 		</div>
 	</div>

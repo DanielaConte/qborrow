@@ -403,7 +403,7 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         };
         scopeController.promise = $http({ 
         		method: 'POST', 
-        		url: qborrowConfig.baseUrl + '/soggetti.action?task=saveCompleanno&reset=true', 
+        		url: qborrowConfig.baseUrl + '/soggetti.action?task=saveWithCompleanno&reset=true', 
         		data: quixParamSerializer(scopeController.selectedRow, 'soggetti.'), 
         		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });

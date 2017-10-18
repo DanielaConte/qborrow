@@ -67,13 +67,12 @@ public class SoggettiManagerAction extends SoggettiAbstractManagerAction {
     }
     
     public String saveWithCompleanno() {
-    	Soggetti soggetti = null;
-        if (soggetti == null) {
+        if (getSoggetti() == null) {
             // New Soggetti and all fields are empty. Create a new empty Soggetti to avoid NPE on validators.
-            soggetti = new Soggetti();
+            setSoggetti(new Soggetti());
         }
         try {
-            getQborrowManager().saveSoggettiCompleanno(soggetti);
+            getQborrowManager().saveSoggettiCompleanno(getSoggetti());
             return manageOkMessage();
         } catch (ValidationException e) {
             return manageValidationError(e.getInvalidConstraints(), "save");

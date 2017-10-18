@@ -80,8 +80,8 @@ qborrowApp.controller('qxSoggettiController', ['$scope', 'qxQborrowHttpService',
 		qxQborrowHttpService.saveSoggetti($scope.scopeController, $scope.forms.soggettiEditForm);
 	}
 	
-	$scope.saveCompleanno = function(row){
-		qxQborrowHttpService.saveSoggetti($scope.scopeController, $scope.forms.soggettiEditForm);
+	$scope.saveWithCompleanno = function(row){
+		qxQborrowHttpService.saveSoggettiWithCompleanno($scope.scopeController, $scope.forms.soggettiEditForm);
 	}
 	
 	$scope.resetSearch = function () {

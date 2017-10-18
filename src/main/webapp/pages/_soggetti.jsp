@@ -55,6 +55,8 @@
 						  	<div ng-message="notNull"><s:text name="error.notNull"/></div>
 						  	<div ng-message="invalidAK"><s:text name="error.invalidAK"/></div>
 						  	<div ng-message="notValid"><s:text name="error.notValid"/></div>
+						  	<div ng-message="minorenne"><s:text name="error.minorenne"/></div>
+					  		<div ng-message="nonNato"><s:text name="error.nonNato"/></div>
 						  	<div ng-message="lenght"><s:text name="error.lenght"/></div>
 						  	<div ng-message="dateToBeforeDateFrom"><s:text name="error.dateToBeforeDateFrom"/></div>
 						  	<div ng-message="fieldToBeforeFieldFrom"><s:text name="error.fieldToBeforeFieldFrom"/></div>

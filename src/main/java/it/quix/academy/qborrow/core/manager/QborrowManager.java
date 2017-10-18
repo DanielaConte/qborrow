@@ -1,34 +1,29 @@
 package it.quix.academy.qborrow.core.manager;
 
-import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import it.quix.academy.qborrow.core.dao.DAOFactory;
+import it.quix.academy.qborrow.core.model.Oggetti;
+import it.quix.academy.qborrow.core.model.Prestiti;
+import it.quix.academy.qborrow.core.model.QborrowUserContext;
+import it.quix.academy.qborrow.core.model.Soggetti;
+import it.quix.academy.qborrow.core.search.OggettiSearch;
+import it.quix.academy.qborrow.core.search.PrestitiSearch;
+import it.quix.academy.qborrow.core.search.SoggettiSearch;
+import it.quix.academy.qborrow.core.validation.ValidatorFactory;
 import it.quix.framework.core.exception.DAOCreateException;
 import it.quix.framework.core.exception.DAODeleteException;
 import it.quix.framework.core.exception.DAOFinderException;
 import it.quix.framework.core.exception.DAOStoreException;
-import it.quix.framework.core.validation.exception.ValidationException;
-import it.quix.framework.core.manager.UserContextHolder;
-import it.quix.academy.qborrow.core.model.QborrowUserContext;
-
-import it.quix.academy.qborrow.core.validation.ValidatorFactory;
-import it.quix.academy.qborrow.core.dao.DAOFactory;
-import it.quix.academy.qborrow.core.model.Oggetti;
-import it.quix.academy.qborrow.core.search.OggettiSearch;
-import it.quix.academy.qborrow.core.model.Prestiti;
-import it.quix.academy.qborrow.core.search.PrestitiSearch;
-import it.quix.academy.qborrow.core.model.Soggetti;
-import it.quix.academy.qborrow.core.search.SoggettiSearch;
-
 import it.quix.framework.core.handler.SysAttributeHandler;
+import it.quix.framework.core.manager.UserContextHolder;
+import it.quix.framework.core.validation.exception.ValidationException;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Interface of the application manager.<br>
@@ -551,6 +546,13 @@ public class QborrowManager {
         soggetti = daoFactory.getSoggettiDAO().get(username);
         return soggetti;
     }
+    
+    @Transactional(readOnly = true, rollbackFor = { QborrowException.class })
+    public Soggetti getSoggettiWithCompleanno(String username) throws DAOFinderException {
+        Soggetti soggetti = null;
+        soggetti = daoFactory.getSoggettiDAO().getWithCompleanno(username);
+        return soggetti;
+    }
 
     /**
      * persist the passed Soggetti object to database, previous validation
@@ -589,6 +591,66 @@ public class QborrowManager {
             updateSoggetti(soggetti, validate);
         }
         return soggetti;
+    }
+    
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Soggetti saveSoggettiCompleanno(Soggetti soggetti) throws QborrowException, ValidationException {
+        return saveSoggettiCompleanno(soggetti, true);
+    }
+
+    /**
+     * persist the passed Soggetti object to database
+     * 
+     * @param soggetti the object to save
+     * @param validate false skip model validation
+     * @return the persisted object
+     * @throws QborrowException if an unexpected exception occurs during
+     *             operation
+     * @throws ValidationException if input data doesn't satisfy validation
+     * @see Soggetti
+     */
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Soggetti saveSoggettiCompleanno(Soggetti soggetti, boolean validate) throws QborrowException, ValidationException {
+        if (validate) {
+            validateSoggetti(soggetti);
+        }
+        if (soggetti.getUsername() == null) {
+            createSoggetti(soggetti, validate);
+        } else {
+            updateSoggettiCompleanno(soggetti, validate);
+        }
+        return soggetti;
+    }
+    
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Soggetti updateSoggettiCompleanno(Soggetti soggetti) throws QborrowException, ValidationException {
+        return updateSoggettiCompleanno(soggetti, true);
+    }
+
+    /**
+     * update the passed Soggetti object to database
+     * 
+     * @param soggetti the object to update
+     * @param validate false skip model validation
+     * @return the updated object
+     * @throws QborrowException if an unexpected exception occurs during
+     *             operation
+     * @throws ValidationException if input data doesn't satisfy validation
+     * @see Soggetti
+     */
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Soggetti updateSoggettiCompleanno(Soggetti soggetti, boolean validate) throws QborrowException, ValidationException {
+        if (validate) {
+            validateSoggetti(soggetti);
+        }
+        try {
+
+            daoFactory.getSoggettiDAO().updateCompleannoSenzaCondizione(soggetti);
+
+            return soggetti;
+        } catch (DAOStoreException ex) {
+            throw new QborrowException(ex, soggetti);
+        }
     }
 
     /**

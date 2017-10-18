@@ -122,7 +122,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
      * @param soggetti The Soggetti to update on database
      * @throws DAOStoreException if no record is updated on database
      */
-    public void update(Soggetti soggetti) throws DAOStoreException {
+    public void updateCompleanno(Soggetti soggetti) throws DAOStoreException {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -186,7 +186,71 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             closeConnection(connection);
         }
     }
+    
+    public void update(Soggetti soggetti) throws DAOStoreException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            // Compose the update query
+            StringBuilder query = new StringBuilder(EOL);
+            query.append(" UPDATE soggetti SET ").append(EOL);
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?").append(EOL);
+            query.append("  WHERE username = ? ").append(EOL); //aggiorno se l'anno è pari
 
+            // Query logging
+            if (queryLog.isInfoEnabled()) {
+                queryLog.info(query);
+            }
+            // Get connection
+            connection = getConnection();
+            // Prepare the statement
+            statement = connection.prepareStatement(query.toString());
+
+            // set preUpdate
+            soggetti.preUpdate(configuration);
+
+            // Set the parameters
+            int p = 1;
+            super.setParameterString(statement, p++, soggetti.getMail());
+            super.setParameterString(statement, p++, soggetti.getRagioneSociale());
+            super.setParameterString(statement, p++, soggetti.getNome());
+            super.setParameterString(statement, p++, soggetti.getCognome());
+            super.setParameterString(statement, p++, soggetti.getImmagine());
+            super.setParameterDate(statement, p++, soggetti.getDataUltimaModifica());
+            super.setParameterDate(statement, p++, soggetti.getDataCompleanno());
+
+            // Set the primary key
+            super.setParameterString(statement, p++, soggetti.getUsername());
+
+            // Execute the query
+            long startTime = System.currentTimeMillis();
+            int numberOfUpdatedRecord = statement.executeUpdate();
+            long endTime = System.currentTimeMillis();
+            long time = endTime - startTime;
+            String msgTime = FrameworkStringUtils.concat("Query time: ", time);
+            if (queryLog.isDebugEnabled()) {
+                queryLog.debug(msgTime);
+            }
+            if (numberOfUpdatedRecord < 1) {
+                String msg =
+                    FrameworkStringUtils.concat("Error while updating the record of type Soggetti ", soggetti, " on database. Number of updated rows: ",
+                        numberOfUpdatedRecord);
+                if (log.isWarnEnabled()) {
+                    log.warn(msg);
+                }
+                throw new DAOStoreException(msg);
+            }
+        } catch (SQLException ex) {
+            String msg = FrameworkStringUtils.concat("Unexpeted error during update of record of type Soggetti ", soggetti, " on database.");
+            if (log.isErrorEnabled()) {
+                log.error(msg, ex);
+            }
+            throw new SystemException(msg, ex);
+        } finally {
+            closeStatement(statement);
+            closeConnection(connection);
+        }
+    }
     /**
      * Return true if oldSoggetti and newSoggetti are different
      * 

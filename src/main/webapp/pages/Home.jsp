@@ -25,7 +25,8 @@
 							<div class="qrow">
 								<div class="qcol-sm-3">
 									<div class="buttonOggetti">
-										<s:a href="%{#oggettiUrl}">Oggetti</s:a>
+										<i class="fa fa-user" aria-hidden="true"></i>
+										<p><s:a href="%{#oggettiUrl}">Oggetti</s:a></p>
 										<s:url id="prestitiUrl" action="prestiti" escapeAmp="false" includeParams="none">
 											<s:param name="task">mainPage</s:param>
 										</s:url>
@@ -34,7 +35,8 @@
 								
 								<div class="qcol-sm-3">
 									<div class="buttonPrestiti">
-									    <s:a href="%{#prestitiUrl}">Prestiti</s:a>
+										<i class="fa fa-user" aria-hidden="true"></i>
+									    <p><s:a href="%{#prestitiUrl}">Prestiti</s:a></p>
 										<s:url id="soggettiUrl" action="soggetti" escapeAmp="false" includeParams="none">
 											<s:param name="task">mainPage</s:param>
 										</s:url>
@@ -43,7 +45,8 @@
 								
 								<div class="qcol-sm-3">
 									<div class="buttonSoggetti">
-										<s:a href="%{#soggettiUrl}">Soggetti</s:a>					
+									<i class="fa fa-user" aria-hidden="true"></i>
+										<p><s:a href="%{#soggettiUrl}">Soggetti</s:a></p>					
 										<s:url id="frmkUrl" namespace="/framework" action="admin" escapeAmp="false" includeParams="none">
 						  					<s:param name="version">2</s:param>
 						  				</s:url>
@@ -52,7 +55,8 @@
 										
 								<div class="qcol-sm-3">
 									<div class="buttonFramework">
-										<s:a href="%{#frmkUrlUrl}">Amministrazione</s:a>
+									<i class="fa fa-user" aria-hidden="true"></i>
+										<p><s:a href="%{#frmkUrlUrl}">Amministrazione</s:a></p>
 									</div>
 								</div>
 							</div>

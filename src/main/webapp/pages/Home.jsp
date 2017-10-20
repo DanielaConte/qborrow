@@ -8,44 +8,58 @@
   		<jsp:include page="_head.jsp"></jsp:include>
   	</head>
   	<body ng-app="qborrow"> 
-  		<div class="frameworkGlobalDiv"> 
+  		<div class="qcontainer-fluid"> <!-- m per contenere la nav bar -->
   			<jsp:include page="_header.jsp" />
-	  		<div class="frameworkRow"  >
-		  		<div class="frameworkLeftMenuCell">
-					<jsp:include page="_left.jsp">
-						<jsp:param name="menuActive" value="Home"/>
-					</jsp:include>
+			 <div class="qcontainer"> 		
+			  		<div qrow> <!-- m -->
+		<!-- 	non ci serve più il menù laterale -->
+		<!-- 	  		<div class="frameworkLeftMenuCell"> -->
+		<%-- 					<jsp:include page="_left.jsp"> --%>
+		<%-- 						<jsp:param name="menuActive" value="Home"/> --%>
+		<%-- 					</jsp:include> --%>
+		<!-- 				</div> -->
+		  				<div class="frameworkMainCell">
+							<div class="qpage-header">
+								<h1>Benvenuto, <s:property value="userContext.getUserText()" /></h1>
+							</div>
+							<div class="qrow">
+								<div class="qcol-sm-3">
+									<div class="buttonOggetti">
+										<s:a href="%{#oggettiUrl}">Oggetti</s:a>
+										<s:url id="prestitiUrl" action="prestiti" escapeAmp="false" includeParams="none">
+											<s:param name="task">mainPage</s:param>
+										</s:url>
+									</div>
+								</div>
+								
+								<div class="qcol-sm-3">
+									<div class="buttonPrestiti">
+									    <s:a href="%{#prestitiUrl}">Prestiti</s:a>
+										<s:url id="soggettiUrl" action="soggetti" escapeAmp="false" includeParams="none">
+											<s:param name="task">mainPage</s:param>
+										</s:url>
+									</div>
+								</div>
+								
+								<div class="qcol-sm-3">
+									<div class="buttonSoggetti">
+										<s:a href="%{#soggettiUrl}">Soggetti</s:a>					
+										<s:url id="frmkUrl" namespace="/framework" action="admin" escapeAmp="false" includeParams="none">
+						  					<s:param name="version">2</s:param>
+						  				</s:url>
+						  			</div>
+								</div>
+										
+								<div class="qcol-sm-3">
+									<div class="buttonFramework">
+										<s:a href="%{#frmkUrlUrl}">Amministrazione</s:a>
+									</div>
+								</div>
+							</div>
+		  				</div>
+		  			</div>
 				</div>
-  				<div class="frameworkMainCell">
-					<div class="qpage-header qtext-warning">
-						<h1>***ATTENZIONE!<br>Questa pagina di HOME &egrave; stata generata automaticamente.<br>
-						Occorre effetuare un restyling grafico per renderla conforme allo scopo per cui &egrave; stato creato il progetto.</h1>
-					</div>
-					<div class="qrow">
-						<div class="qcol-xs-12">
-							<ul class="qnav qnav-pills qnav-stacked">
-								<s:url id="oggettiUrl" action="oggetti" escapeAmp="false" includeParams="none">
-									<s:param name="task">mainPage</s:param>
-								</s:url>
-								<li><s:a href="%{#oggettiUrl}">Oggetti</s:a></li>
-								<s:url id="prestitiUrl" action="prestiti" escapeAmp="false" includeParams="none">
-									<s:param name="task">mainPage</s:param>
-								</s:url>
-								<li><s:a href="%{#prestitiUrl}">Prestiti</s:a></li>
-								<s:url id="soggettiUrl" action="soggetti" escapeAmp="false" includeParams="none">
-									<s:param name="task">mainPage</s:param>
-								</s:url>
-								<li><s:a href="%{#soggettiUrl}">Soggetti</s:a></li>						
-								<s:url id="frmkUrl" namespace="/framework" action="admin" escapeAmp="false" includeParams="none">
-				  					<s:param name="version">2</s:param>
-				  				</s:url>
-				  				<li><s:a href="%{#frmkUrlUrl}">Amministrazione Framework</s:a></li>
-							</ul>
-						</div>
-					</div>
-  				</div>
-			</div>
-  		 	<jsp:include page="_footer.jsp" />
-	  	</div>	
+		  		 <jsp:include page="_footer.jsp" />
+			 </div>	
   	</body>
 </html>

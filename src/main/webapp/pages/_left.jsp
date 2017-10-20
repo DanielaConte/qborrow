@@ -21,7 +21,7 @@
 	<s:param name="version">2</s:param>
 </s:url>
 
-<!-- Sidebar Menu -->
+<!-- Sidebar Menu (menù laterale, non lo abbiamo incluso in home.jsp quindi non lo vediamo) -->
 <ul class="framework-sidebar-menu">
 	<li class="framework-sidebar-menu-element qtext-left <% if("Home".equals(request.getParameter("menuActive"))) { %>framework-sidebar-menu-element-active<% } %>">
 		<a class="framework-sidebar-menu-element-link" href="<s:property value="#homeUrl" escape="false" />">

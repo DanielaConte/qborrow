@@ -62,6 +62,7 @@ public class SoggettiValidator extends QborrowAbstractValidator<Soggetti> {
             if (day2 > day1) {
                 age--;
             }
+            
         }
         if ((dataCompl.after(dateNow))) {
         	InvalidConstraint<Soggetti> ic =

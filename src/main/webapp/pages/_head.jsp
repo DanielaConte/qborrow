@@ -6,14 +6,16 @@
 	<s:param name="task">checkSession</s:param>
 </s:url>
 
-  	<title><s:text name="application.title" /></title>
+  	<title>Qborrow</title> <!-- m -->
+  	<meta name="description" content="Sistema di gestione prestiti"> <!-- m (meta perchè è una web app) -->
   	<meta charset="utf-8">
   	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-  
+  	
+  	<!-- favicon --> 
   	<link rel="icon" href="<%=(request.getProtocol().toLowerCase().contains("https"))?"https":"http" %>://<%=request.getServerName() %>:<%=request.getServerPort() %><%=request.getContextPath() %>/favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="<%=(request.getProtocol().toLowerCase().contains("https"))?"https":"http" %>://<%=request.getServerName() %>:<%=request.getServerPort() %><%=request.getContextPath() %>/favicon.ico" type="image/x-icon" />
 
-	<!-- JQuery -->  
+	<!-- JQuery -->  <!-- deve essere inclusa prima di bootstrap, altrimenti errore -->
 	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/jqery-1.11.3/jquery-1.11.3.js"></script>
 	<!-- Bootstrap -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/lib/bootstrap-3.3.2/css/qbootstrap.css">
@@ -24,16 +26,16 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-1.5.9/angular-messages.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-1.5.9/i18n/angular-locale_<s:property value="userContext.locale.language" /><s:if test="userContext.locale.country != ''">-<s:property value="userContext.locale.country.toLowerCase()" /></s:if>.js"></script>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/lib/animate/animate.css?_<jsp:include page='_version.jsp' />">   
-    <!-- SweetAlert -->
+    <!-- SweetAlert --> <!-- libreria per la creazione di modali (tipo pop up per l'errore), in realtà includiamo file inutilmente, basta bootstrap -->
     <script type="text/javascript" src="<%=request.getContextPath() %>/lib/SweetAlert-0.4.1/sweet-alert.min.js"></script>
 	<link  rel="stylesheet" href="<%=request.getContextPath() %>/lib/SweetAlert-0.4.1/sweet-alert.css"> 
 	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-ngSweetAlert-1.0.0/SweetAlert.min.js"></script>
-	<!-- font-awesome -->
+	<!-- font-awesome --> <!-- libreria per le icone -->
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/lib/font-awesome-4.3.0/css/font-awesome.css" >
 	<!-- Angular Ui -->
 	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-ui-bootstrap-0.12.0/ui-bootstrap-tpls-0.12.0.min.js"></script> 	
 
-	<!-- Angular DateTime Picker -->
+	<!-- Angular DateTime Picker --> <!-- è necessario per i problemi di compatibilità, altrimenti bastava datetime in html5 -->
 	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-moment/moment.min.js?_<jsp:include page='_version.jsp' />"></script>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/lib/angular-bootstrap-datetimepicker-1.0.1/datetimepicker.css" />
 	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/angular-bootstrap-datetimepicker-1.0.1/datetimepicker.js"></script>
@@ -46,9 +48,13 @@
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/filter/qxSysAttributeFilter.js?_<jsp:include page='_version.jsp' />"></script>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/scripts/directive/qxDateDirective.js?_<jsp:include page='_version.jsp' />"></script>
 	
+	<!-- Qborrow stylesheet -->
+	<link  rel="stylesheet" href="<%=request.getContextPath() %>/themes/style.css?_<jsp:include page='_version.jsp' />"> <!-- m -->
+	
 	<style>
+			/* Caricamento fonts */
 			@font-face {
-			    font-family: 'robotoregular';
+			    font-family: 'robotoregular'; /* m */
 			    src: url('<%=request.getContextPath() %>/lib/font-roboto/Roboto-Regular-webfont.eot');
 			    src: url('<%=request.getContextPath() %>/lib/font-roboto/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
 			         url('<%=request.getContextPath() %>/lib/font-roboto/Roboto-Regular-webfont.woff') format('woff'),
@@ -71,6 +77,7 @@
 			}
 			
 	</style>
+	
 	
 	<script type="text/javascript">
 		

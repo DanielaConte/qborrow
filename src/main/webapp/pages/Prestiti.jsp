@@ -21,7 +21,7 @@
 		</script>
   	</head>
   	<body ng-app="qborrow"> 
-  		<div class="frameworkGlobalDiv"> 
+  		<div class="qcontainer-fluid"> <!-- m barra del menu messa in orizzontale -->
   			<jsp:include page="_header.jsp" />
 	  		<div class="frameworkRow"  >
 		  		<div class="frameworkLeftMenuCell">

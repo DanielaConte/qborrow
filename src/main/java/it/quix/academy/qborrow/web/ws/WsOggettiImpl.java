@@ -8,10 +8,10 @@ import javax.jws.WebService;
 public class WsOggettiImpl implements WsOggetti {
 
     public Oggetti getResponse(Integer id) {
-    	Oggetti oggetto = new Oggetti();
-    	oggetto.setId(id);
+        Oggetti oggetto = new Oggetti();
+        oggetto.setId(id);
         // TODO Auto-generated method stub
         return oggetto;
     }
 
-} 
+}

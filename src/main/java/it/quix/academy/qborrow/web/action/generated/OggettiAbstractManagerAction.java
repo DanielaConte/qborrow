@@ -303,4 +303,5 @@ public class OggettiAbstractManagerAction extends QborrowManagerAction {
     public void setOggetti(Oggetti oggetti) {
         this.oggetti = oggetti;
     }
+
 }

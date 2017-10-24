@@ -546,7 +546,7 @@ public class QborrowManager {
         soggetti = daoFactory.getSoggettiDAO().get(username);
         return soggetti;
     }
-    
+
     @Transactional(readOnly = true, rollbackFor = { QborrowException.class })
     public Soggetti getSoggettiWithCompleanno(String username) throws DAOFinderException {
         Soggetti soggetti = null;
@@ -592,7 +592,7 @@ public class QborrowManager {
         }
         return soggetti;
     }
-    
+
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
     public Soggetti saveSoggettiCompleanno(Soggetti soggetti) throws QborrowException, ValidationException {
         return saveSoggettiCompleanno(soggetti, true);
@@ -621,7 +621,7 @@ public class QborrowManager {
         }
         return soggetti;
     }
-    
+
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
     public Soggetti updateSoggettiCompleanno(Soggetti soggetti) throws QborrowException, ValidationException {
         return updateSoggettiCompleanno(soggetti, true);

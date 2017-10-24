@@ -51,7 +51,7 @@ public class SoggettiManagerAction extends SoggettiAbstractManagerAction {
      * Log
      */
     private static Log log = LogFactory.getLog(SoggettiManagerAction.class);
-    
+
     /**
      * Edit task.
      * This method edit one soggetti instance.
@@ -59,13 +59,13 @@ public class SoggettiManagerAction extends SoggettiAbstractManagerAction {
     public String editWithCompleanno() {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         try {
-        	Soggetti soggetti = getQborrowManager().getSoggettiWithCompleanno(getSoggetti().getUsername());
+            Soggetti soggetti = getQborrowManager().getSoggettiWithCompleanno(getSoggetti().getUsername());
             return manageSerialize(soggetti);
         } catch (Exception e) {
             return manageException("Error on edit Soggetti", e);
         }
     }
-    
+
     public String saveWithCompleanno() {
         if (getSoggetti() == null) {
             // New Soggetti and all fields are empty. Create a new empty Soggetti to avoid NPE on validators.

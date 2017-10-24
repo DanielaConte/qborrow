@@ -129,8 +129,9 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE soggetti SET ").append(EOL);
-            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?").append(EOL);
-            query.append("  WHERE username = ? AND year((data_compleanno)%2)=0").append(EOL); //aggiorno se l'anno è pari
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?")
+                .append(EOL);
+            query.append("  WHERE username = ? AND year((data_compleanno)%2)=0").append(EOL); // aggiorno se l'anno è pari
 
             // Query logging
             if (queryLog.isInfoEnabled()) {
@@ -186,7 +187,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             closeConnection(connection);
         }
     }
-    
+
     public void update(Soggetti soggetti) throws DAOStoreException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -194,8 +195,9 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE soggetti SET ").append(EOL);
-            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?").append(EOL);
-            query.append("  WHERE username = ? ").append(EOL); //aggiorno se l'anno è pari
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?")
+                .append(EOL);
+            query.append("  WHERE username = ? ").append(EOL); // aggiorno se l'anno è pari
 
             // Query logging
             if (queryLog.isInfoEnabled()) {
@@ -251,6 +253,7 @@ public abstract class SoggettiAbstractDAO extends AbstractJDBCDAO {
             closeConnection(connection);
         }
     }
+
     /**
      * Return true if oldSoggetti and newSoggetti are different
      * 

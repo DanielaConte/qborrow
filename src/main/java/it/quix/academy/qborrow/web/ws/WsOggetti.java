@@ -11,4 +11,4 @@ public interface WsOggetti {
     @WebMethod
     Oggetti getResponse(Integer id);
 
-} 
+}

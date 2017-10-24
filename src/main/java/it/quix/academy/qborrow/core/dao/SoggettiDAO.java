@@ -37,7 +37,7 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
     public void init() {
         log.info("SoggettoDAO initialized custom");
     }
-    
+
     public void updateCompleannoSenzaCondizione(Soggetti soggetti) throws DAOStoreException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -45,8 +45,9 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE soggetti SET ").append(EOL);
-            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?").append(EOL);
-            query.append("  WHERE username = ? ").append(EOL); //aggiorno se l'anno è pari
+            query.append(" mail = ? , ragione_sociale = ? , nome = ? , cognome = ? , immagine = ? , data_ultima_modifica = ? , data_compleanno = ?")
+                .append(EOL);
+            query.append("  WHERE username = ? ").append(EOL); // aggiorno se l'anno è pari
 
             // Query logging
             if (queryLog.isInfoEnabled()) {
@@ -102,7 +103,7 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
             closeConnection(connection);
         }
     }
-    
+
     public Soggetti getWithCompleanno(String username) throws DAOFinderException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -135,7 +136,7 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
                 queryLog.debug(msgTime);
             }
             if (rs.next()) {
-                Soggetti soggettiModel = buildModelFromResultSetWithCompleanno(rs,getQborrowManager());
+                Soggetti soggettiModel = buildModelFromResultSetWithCompleanno(rs, getQborrowManager());
                 return soggettiModel;
             }
             throw new DAOFinderException(FrameworkStringUtils.concat("Cannot find Soggetti on database with [username = ", username, "]"));
@@ -153,7 +154,6 @@ public class SoggettiDAO extends SoggettiAbstractDAO {
         }
     }
 
-    
     public Soggetti buildModelFromResultSetWithCompleanno(ResultSet rs, QborrowManager qborrowManager) throws SQLException {
         Soggetti soggetti = new Soggetti();
 

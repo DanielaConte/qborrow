@@ -71,14 +71,14 @@ public class TestRs {
 
     @PUT
     public Oggetti putOggetto(Oggetti oggetto) throws QborrowException, ValidationException {
-    	oggetto.setId(50);
-    	QborrowManager manager = new QborrowManager();
-    	Oggetti ogg = new Oggetti();
-    	ogg = manager.updateOggetti(oggetto);
+        oggetto.setId(50);
+        QborrowManager manager = new QborrowManager();
+        Oggetti ogg = new Oggetti();
+        ogg = manager.updateOggetti(oggetto);
         // UPDATE ON DB
         return ogg;
     }
-    
+
     @DELETE
     public String deleteOggetti() {
         return "{\"message\":  \"OK\"}";
@@ -92,7 +92,5 @@ public class TestRs {
         return "{\"message\":  \"OK\"}";
 
     }
-    
-    
 
 }

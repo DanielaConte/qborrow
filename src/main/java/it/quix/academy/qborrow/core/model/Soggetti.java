@@ -156,7 +156,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
     @Column(length = 50, name = "data_ultima_modifica", nullable = false)
     @QrExcelColumn(order = 0)
     private Date dataUltimaModifica;
-    
+
     /**
      * Property of field:
      * <ul>
@@ -279,7 +279,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
         sb.append(", ").append("immagine=").append(immagine);
 
         sb.append(", ").append("dataUltimaModifica=").append(dataUltimaModifica);
-        
+
         sb.append(", ").append("dataCompleanno= ").append(dataCompleanno);
 
         sb.append(", ").append("oggetti=").append(oggetti);
@@ -575,7 +575,7 @@ public class Soggetti extends QborrowAbstractModel implements Serializable {
     public void setDataUltimaModifica(Date dataUltimaModifica) {
         this.dataUltimaModifica = dataUltimaModifica;
     }
-    
+
     public Date getDataCompleanno() {
         return dataCompleanno;
     }

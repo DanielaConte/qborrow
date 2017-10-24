@@ -42,7 +42,7 @@ public class SoggettiValidator extends QborrowAbstractValidator<Soggetti> {
         if (log.isDebugEnabled()) {
             log.debug("Call customValidation method for class SoggettiValidator ");
         }
-        
+
         Calendar now = Calendar.getInstance();
         Date dataCompl = soggetti.getDataCompleanno();
         Calendar dob = Calendar.getInstance();
@@ -62,20 +62,18 @@ public class SoggettiValidator extends QborrowAbstractValidator<Soggetti> {
             if (day2 > day1) {
                 age--;
             }
-            
+
         }
         if ((dataCompl.after(dateNow))) {
-        	InvalidConstraint<Soggetti> ic =
-            new InvalidConstraintImpl<Soggetti>(Soggetti.class, "error.nonNato", propertyPath + "dataCompleanno",
-            soggetti, soggetti.getDataCompleanno());
-        	errors.add(ic);
-		}
-        if (age<18) {
-        	InvalidConstraint<Soggetti> ic2 =
-            new InvalidConstraintImpl<Soggetti>(Soggetti.class, "error.minorenne", propertyPath + "dataCompleanno",
-            soggetti, soggetti.getDataCompleanno());
-        	errors.add(ic2);
-		}
+            InvalidConstraint<Soggetti> ic =
+                new InvalidConstraintImpl<Soggetti>(Soggetti.class, "error.nonNato", propertyPath + "dataCompleanno", soggetti, soggetti.getDataCompleanno());
+            errors.add(ic);
+        }
+        if (age < 18) {
+            InvalidConstraint<Soggetti> ic2 =
+                new InvalidConstraintImpl<Soggetti>(Soggetti.class, "error.minorenne", propertyPath + "dataCompleanno", soggetti, soggetti.getDataCompleanno());
+            errors.add(ic2);
+        }
         // insert here custom validations for Soggetti model
         // after a validation check fail create a new InvalidContraint of the validated type
         // and instantiate an InvalidContraintImpl of the validated type with the error information, es:

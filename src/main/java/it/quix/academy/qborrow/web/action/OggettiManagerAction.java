@@ -60,6 +60,7 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
      * 
      * @return
      */
+    // questo serve per struts
     public String mieiOggetti() {
         return "mieiOggetti";
     }
@@ -107,12 +108,34 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
         }
     }
 
+    private List<Oggetti> oggettiList = new ArrayList<Oggetti>();
+
+    // metodo per selezionare i soggetti con struts invece che nel modo normale
+    public String listMieiOggettiStruts() {
+
+        // if there are result
+        oggettiSearch = new OggettiSearch();
+        oggettiSearch.setPage(0);
+        oggettiSearch.setRowPerPage(10);
+        oggettiList = getQborrowManager().getOggettiList(oggettiSearch);
+        return "listMieiOggetti";
+
+    }
+
     public OggettiSearch getOggettiSearch() {
         return oggettiSearch;
     }
 
     public void setOggettiSearch(OggettiSearch oggettiSearch) {
         this.oggettiSearch = oggettiSearch;
+    }
+
+    public List<Oggetti> getOggettiList() {
+        return oggettiList;
+    }
+
+    public void setOggettiList(List<Oggetti> oggettiList) {
+        this.oggettiList = oggettiList;
     }
 
 }

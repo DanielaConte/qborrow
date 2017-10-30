@@ -1,0 +1,218 @@
+/* Qborrow styles*/
+
+			@font-face {
+			    font-family: 'opensansregular'; 
+			    src: url('../fonts/OpenSans-Regular.ttf');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			
+			/* carattere bold */
+			@font-face {
+			    font-family:'opensansregular';
+			    src: url('../fonts/OpenSans-Bold.ttf');
+			    font-weight:bold;
+			    font-style:normal;
+			}
+			
+			/* carattere corsivo */
+			@font-face {
+			    font-family:'opensansregular'; 
+			    src: url('../fonts/OpenSans-Italic.ttf');
+			    font-weight:normal;
+			    font-style:italic;
+			}
+			
+			@font-face {
+			    font-family: 'titillium'; 
+			    src: url('../fonts/TitilliumWeb-Light.ttf');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+			
+			@font-face {
+			    font-family: 'titillium'; 
+			    src: url('../fonts/TitilliumWeb-Regular.ttf');
+			    font-weight: 100;
+			    font-style: normal;
+			}
+			
+			@font-face {
+			    font-family: 'titillium'; 
+			    src: url('../fonts/TitilliumWeb-Bold.ttf');
+			    font-weight: bold;
+			    font-style: normal;
+			}
+			
+body {
+	
+	font-family:'opensansregular',sans-serif; /*font del body*/
+	font-weight:bold;
+	
+}
+
+/* selezioniamo dalla h1 alla h6 e attribuiamo il carattere*/
+body h1 , 
+body h2 , 
+body h3 , 
+body h4 , 
+body h5 , 
+body h6 {
+	
+	font-family: 'titillium', sans-serif;
+	font-weight: 100;
+}
+
+/*togliamo il background da utente quando clicchiamo sul menu utente*/
+/*navigation menu*/
+.qnav .qopen > a, .qnav .qopen > a:hover, .qnav .qopen > a:focus{
+	background: none;
+}
+
+.qnavbar-default{
+	border-radius:0px;
+	background: #2574a9;
+}
+
+.qnavbar-default .qnav li a.framework-sidebar-menu-element-link{
+	
+	color: white;
+	text-transform: uppercase;
+	font-size: 14;
+	
+} 
+
+/*margin left sul menu solo fino a prima di collassare nell'hamburger*/
+@media (min-width: 768px){
+	.qnavbar-nav{
+	margin-left: 8%;
+	margin-top: 6px;
+	}
+}
+
+.qnav .frameworkHeaderRightCellUserDiv{
+	border-left: none;
+} 
+
+.qnav .frameworkHeaderRightCellUserDiv .user-menu-link{
+	color: white;
+}
+
+.qnav .frameworkHeaderRightCellUserDiv .user-menu-link .fa-user{
+	font-size: 20px;
+	margin-right: 15px;
+	border: 1px solid white;
+	border-radius: 100px;
+	padding:5px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+}
+
+.qnavbar-brand{
+	height: auto;
+}
+
+.qnavbar-right {
+	margin-top:0px;
+}
+
+/*colore delle lineette dell'hamburger*/
+.qnavbar-default .qnavbar-toggle .qicon-bar{
+    background-color: white;
+}
+
+.qnavbar-default .qnavbar-toggle:hover .qicon-bar{
+    background-color: #888;
+}
+
+.qnavbar-default .qnavbar-toggle:hover{
+	cursor: pointer;
+}
+
+/*main content*/
+.frameworkMainCell{
+    background: none;
+    display: block;
+    min-height: 900px; /*dare un minimo prima che compaia il footer*/
+}
+
+.frameworkMainCell .qrow{
+	text-align: center;
+}
+
+.qcol-sm-3 .buttonOggetti {
+	border: 1px solid #efefef;
+	padding: 15px;
+	border-radius: 2px;
+}
+
+.qcol-sm-3 .buttonSoggetti {
+	border: 1px solid #efefef;
+	padding: 15px;
+	border-radius: 2px;
+}
+
+.qcol-sm-3 .buttonPrestiti {
+	border: 1px solid #efefef;
+	padding: 15px;
+	border-radius: 2px;
+}
+
+.qcol-sm-3 .buttonFramework {
+	border: 1px solid #efefef;
+	padding: 15px;
+	border-radius: 2px;
+}
+
+.qcol-sm-3 .buttonOggetti a{
+	color:black;
+}
+
+.qcol-sm-3 .buttonPrestiti a{
+	color:black;
+}
+
+.qcol-sm-3 .buttonSoggetti a{
+	color:black;
+}
+
+.qcol-sm-3 .buttonFramework a{
+	color:black;
+}
+
+/*footer*/
+.copy{
+	font-size:12px;
+	text-align: center;
+	background: #efefefef;
+	padding: 25px 0px; 
+	color:#94949494;
+	letter-spacing: 1px;
+	border-top:1px solid #94949494; /*bordo superiore footer*/
+	}
+
+/*colore della parola quix nel footer, important per vincere su un'istruzione nella pagina footer*/
+.copy a{
+	color:#d6d6d6;
+	text-decoration: underline;
+	transition:color 0.5;
+	text-transform: uppercase;
+}
+
+.copy a:hover{
+	color:#449ef1;
+}
+	
+.errorMessage{
+	padding: 7px;
+    font-size: 15px;
+    color: #ff0909;
+}
+
+
+
+
+
+
+

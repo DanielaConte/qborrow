@@ -88,8 +88,9 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         scopeController.promise = $http({ 
         		method: 'POST', 
         		url: qborrowConfig.baseUrl + '/oggetti.action?task=edit', 
-        		data: quixParamSerializer(scopeController.selectedRow, 'oggetti.'), 
-        		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        		data: {
+        			"oggetti" : {"id":scopeController.selectedRow.id,}, 
+        			}
         });
         scopeController.promise.success(success).error(_manageError);
     }
@@ -308,6 +309,29 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         scopeController.promise.success(success).error(_manageError);
     }
     
+    this.editUser = function(scopeController){
+    	var success = function (data) {
+        	if((typeof data) == 'string') {
+        		// Not Managed Server error
+        		_manageError(data, 0);
+        		return;
+        	}
+        	if(data.error == true) {
+        		_manageError(data, 0);
+        		return;
+        	}
+        	scopeController.selectedRow = data;
+        	//scopeController.selectedPage = "edit";
+        };
+    	
+        scopeController.promise = $http({ 
+        		method: 'POST', 
+        		url: qborrowConfig.baseUrl + '/soggetti.action?task=editUser', 
+        		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        });
+        scopeController.promise.success(success).error(_manageError);
+    }
+    
     this.editSoggettiWithCompleanno = function(scopeController){
     	var success = function (data) {
         	if((typeof data) == 'string') {
@@ -399,6 +423,8 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         	} else {
         		_getSoggettiList(scopeController, null);
         		scopeController.selectedPage = 'list';
+        		form.email.$error = {}; //svuota gli errori, perchè altrimenti non sarà mai cancellato
+        		form.email.$invalid = false;
         	}
         };
         scopeController.promise = $http({ 

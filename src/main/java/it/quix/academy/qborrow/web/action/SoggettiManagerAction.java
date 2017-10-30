@@ -52,6 +52,10 @@ public class SoggettiManagerAction extends SoggettiAbstractManagerAction {
      */
     private static Log log = LogFactory.getLog(SoggettiManagerAction.class);
 
+    public String mioProfilo() {
+        return "mioProfilo";
+    }
+
     /**
      * Edit task.
      * This method edit one soggetti instance.
@@ -63,6 +67,16 @@ public class SoggettiManagerAction extends SoggettiAbstractManagerAction {
             return manageSerialize(soggetti);
         } catch (Exception e) {
             return manageException("Error on edit Soggetti", e);
+        }
+    }
+
+    public String editUser() {
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        try {
+            Soggetti soggetti = getQborrowManager().getSoggettiWithCompleanno(getUserContext().getUserText());
+            return manageSerialize(soggetti);
+        } catch (Exception e) {
+            return manageException("Error on edit User", e);
         }
     }
 

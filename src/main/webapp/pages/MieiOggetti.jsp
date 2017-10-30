@@ -32,7 +32,7 @@
 					
   				</div>
   				<script type="text/ng-template" id="list"><jsp:include page="_mieiOggetti.jsp" /></script>
-  				<script type="text/ng-template" id="edit"><jsp:include page="_oggettiEdit.jsp" /></script>		
+  				<script type="text/ng-template" id="edit"><jsp:include page="oggettoDettaglio.jsp" /></script>		
 			</div>
   		 	<jsp:include page="_footer.jsp" />
 	  	</div>	

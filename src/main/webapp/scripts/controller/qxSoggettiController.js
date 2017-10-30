@@ -38,6 +38,10 @@ qborrowApp.controller('qxSoggettiController', ['$scope', 'qxQborrowHttpService',
 		qxQborrowHttpService.editSoggetti($scope.scopeController);
 	}
 	
+	$scope.editUser = function(){
+		qxQborrowHttpService.editUser($scope.scopeController);
+	}
+	
 	$scope.editWithCompleanno = function(row){
 		$scope.scopeController.selectedRow = row;
 		qxQborrowHttpService.editSoggettiWithCompleanno($scope.scopeController);
@@ -80,8 +84,23 @@ qborrowApp.controller('qxSoggettiController', ['$scope', 'qxQborrowHttpService',
 		qxQborrowHttpService.saveSoggetti($scope.scopeController, $scope.forms.soggettiEditForm);
 	}
 	
+	/*
+	$scope.saveUser = function(row){
+		if($scope.forms.userEditForm.$invalid){
+			swal({title: "ERRORE", text: "Ci sono campi non validi!", type: "error", confirmButtonText: "Close", allowOutsideClick: true});
+		}else{
+			qxQborrowHttpService.saveSoggettiWithCompleanno($scope.scopeController, $scope.forms.userEditForm);
+		}
+	}*/
+	
+	$scope.saveUser = function(row){
+		
+			qxQborrowHttpService.saveSoggettiWithCompleanno($scope.scopeController, $scope.forms.userEditForm);
+			
+	}
+	
 	$scope.saveWithCompleanno = function(row){
-		qxQborrowHttpService.saveSoggettiWithCompleanno($scope.scopeController, $scope.forms.soggettiEditForm);
+		qxQborrowHttpService.saveSoggettiWithCompleanno($scope.scopeController, $scope.forms.userEditForm);
 	}
 	
 	$scope.resetSearch = function () {

@@ -24,6 +24,9 @@
 <s:url id="soggettiUrl" namespace="/" action="soggetti" escapeAmp="false" includeParams="none">
 	<s:param name="task">mainPage</s:param>
 </s:url>
+<s:url id="userUrl" namespace="/" action="soggetti" escapeAmp="false" includeParams="none">
+	<s:param name="task">mioProfilo</s:param>
+</s:url>
 
 
 <!-- Bootstrap navbar (hamburger) m -->
@@ -105,8 +108,7 @@
 								</p></li>
 							<li class="user-footer">
 								<div class="qpull-left">
-									<a href=""
-										onclick="javascript:window.open('/puma/mydetailedit.do?dn=<s:property value="userContext.realUserDn"/>', 'detailPuma', 'width=600,height=600,statusbar=no,toolbar=no,scrollbars=no,resizable=yes')"
+									<a href="<s:property value="#userUrl" escape="false" />"
 										class="qbtn qbtn-default qbtn-flat"><s:text
 											name="header.profile" /></a>
 								</div>

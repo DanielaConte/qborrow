@@ -50,6 +50,7 @@
 		
 		<action name="soggetti" class="soggettiAction">
 			<result name="mainPage">/pages/Soggetti.jsp</result>
+			<result name="mioProfilo">/pages/mioProfilo.jsp</result>
 			<interceptor-ref name="quixStack" >
 				<param name="quixValidationInterceptor.exludeMethods">select</param>
 			</interceptor-ref>

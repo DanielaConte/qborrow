@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,5 +86,15 @@ public class SoggettiValidator extends QborrowAbstractValidator<Soggetti> {
         // [value] is the value of the property which generated the error
         // in the end, add the new invalid constraint to the errors array, es:
         // errors.add(ic);
+
+        String mail = soggetti.getMail();
+
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+        if (!pattern.matcher(mail).matches()) {
+            InvalidConstraint<Soggetti> ic3 =
+                new InvalidConstraintImpl<Soggetti>(Soggetti.class, "error.mail", propertyPath + "email", soggetti, soggetti.getMail());
+            errors.add(ic3);
+        }
     }
 }

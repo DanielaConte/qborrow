@@ -119,13 +119,29 @@
 		</div>
 		<div class="box-body">
 			<div class="qrow">	
-				<div class="qcol-md-4">
-					<label for="soggetti"><s:text name="oggetti.edit.soggetti"/></label>
+				<div class="qcol-md-4" ng-class="{'qhas-error': forms.oggettiEditForm.beneficiario.$invalid}">
+					<label for="beneficiario"><s:text name="oggetti.edit.soggetti"/></label>
 					<input type="text" 
-						ng-model="scopeController.selectedRow.prestito.beneficiario" 
-						id="immagine" 
-						name="immagine"
+						ng-model="scopeController.selectedRow.prestito.soggetti.username" 
+						id="beneficiario" 
+						name="beneficiario"
 						class="qform-control" />
+					<div ng-messages="forms.oggettiEditForm.immagine.$error" role="alert">
+					  	<div ng-message="notNull"><s:text name="error.notNull"/></div>
+					  	<div ng-message="invalidAK"><s:text name="error.invalidAK"/></div>
+					  	<div ng-message="notValid"><s:text name="error.notValid"/></div>
+					  	<div ng-message="lenght"><s:text name="error.lenght"/></div>
+					  	<div ng-message="dateToBeforeDateFrom"><s:text name="error.dateToBeforeDateFrom"/></div>
+					  	<div ng-message="fieldToBeforeFieldFrom"><s:text name="error.fieldToBeforeFieldFrom"/></div>
+					  	<div ng-message="notUnique"><s:text name="error.notUnique"/></div>
+					  	<div ng-message="min"><s:text name="error.min"/></div>
+					  	<div ng-message="max"><s:text name="error.max"/></div>
+					  	<div ng-message="ognl"><s:text name="error.ognl"/></div>
+					  	<div ng-message="pattern"><s:text name="error.pattern"/></div>
+					  	<div ng-message="notBlank"><s:text name="error.notBlank"/></div>
+					  	<div ng-message="qvpattern.message"><s:text name="error.qvpattern.message"/></div>
+					  	<div ng-message="string.length"><s:text name="error.string.length"/></div>
+					</div>
 				</div>
 			</div>	
 		<div class="qrow">	

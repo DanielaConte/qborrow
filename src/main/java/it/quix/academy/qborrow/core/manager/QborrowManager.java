@@ -153,16 +153,30 @@ public class QborrowManager {
     }
 
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
-    public Oggetti saveOggettiPrestito(Oggetti oggetti, Prestiti prestito, boolean validate) throws QborrowException, ValidationException {
+    public Oggetti saveOggettiWithUser(Oggetti oggetti) throws QborrowException, ValidationException {
+        return saveOggetti(oggetti, true);
+    }
+
+    /**
+     * persist the passed Oggetti object to database
+     * 
+     * @param oggetti the object to save
+     * @param validate false skip model validation
+     * @return the persisted object
+     * @throws QborrowException if an unexpected exception occurs during
+     *             operation
+     * @throws ValidationException if input data doesn't satisfy validation
+     * @see Oggetti
+     */
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Oggetti saveOggettiWithUser(Oggetti oggetti, boolean validate) throws QborrowException, ValidationException {
         if (validate) {
             validateOggetti(oggetti);
         }
         if (oggetti.getId() == null) {
             createOggetti(oggetti, validate);
-            createPrestiti(prestito, validate);
         } else {
             updateOggetti(oggetti, validate);
-            updatePrestiti(prestito, validate);
         }
         return oggetti;
     }
@@ -188,6 +202,18 @@ public class QborrowManager {
      * @param oggetti the object to create
      * @param validate false skip model validation
      * @return the created object
+     * @throws QborrowException if an unexpected exception occurs during
+     *             operation
+     * @throws ValidationException if input data doesn't satisfy validation
+     * @see Oggetti
+     */
+    @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
+    public Oggetti createOggetti(Oggetti oggetti, boolean validate) throws QborrowException, ValidationException {
+        if (validate) {
+            validateOggetti(oggetti);
+        }
+        try {
+            daoFactory.getOggettiDAO().create(oggetti);
             return oggetti;
         } catch (DAOCreateException ex) {
             throw new QborrowException(ex, oggetti);

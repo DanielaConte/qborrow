@@ -23,6 +23,7 @@ import it.quix.framework.core.validation.InvalidConstraintImpl;
 import it.quix.framework.core.validation.api.InvalidConstraint;
 import it.quix.framework.core.validation.exception.ValidationException;
 import it.quix.academy.qborrow.core.model.Oggetti;
+import it.quix.academy.qborrow.core.model.Soggetti;
 import it.quix.academy.qborrow.core.search.OggettiSearch;
 import it.quix.academy.qborrow.core.manager.QborrowManager;
 import it.quix.academy.qborrow.core.manager.QborrowException;
@@ -64,19 +65,19 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
         return "mieiOggetti";
     }
 
-    // salvataggio con proprietario che è l'utente loggato
-    public String saveUser() {
+    public String saveOggettiUser() {
         if (getOggetti() == null) {
-            // New Oggetti and all fields are empty. Create a new empty Oggetti to avoid NPE on validators.
+            // New Oggetti and all fields are empty. Create a new empty Soggetti to avoid NPE on validators.
             setOggetti(new Oggetti());
         }
         try {
-            Oggetti oggetti = getQborrowManager().saveOggetti(getUserContext().getRealUserDn());
+            getOggetti().setSoggetti_username(userContext.getRealUserDn());
+            getQborrowManager().saveOggettiWithUser(getOggetti());
             return manageOkMessage();
         } catch (ValidationException e) {
             return manageValidationError(e.getInvalidConstraints(), "save");
         } catch (Exception e) {
-            return manageException("Error on save Oggetti", e);
+            return manageException("Error on save Soggetti", e);
         }
     }
 
@@ -89,26 +90,26 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
     public String listMieiOggetti() throws QborrowException {
         try {
             log.debug("Il mio username e: " + getUserContext().getRealUserDn());
-            oggettiSearch.setSoggetti_username(getUserContext().getRealUserDn());
+            getOggettiSearch().setSoggetti_username(getUserContext().getRealUserDn());
 
             // Validate the search model
-            getQborrowManager().validateOggettiSearch(oggettiSearch);
+            getQborrowManager().validateOggettiSearch(getOggettiSearch());
             // Perform count of record that satisfy search filters
-            long total = getQborrowManager().countMieiOggetti(oggettiSearch);
+            long total = getQborrowManager().countMieiOggetti(getOggettiSearch());
             // If there are results ...
             List<Oggetti> oggettiList = null;
             if (total > 0) {
                 // Search the results to display
                 do {
-                    oggettiList = getQborrowManager().getMieiOggettiList(oggettiSearch);
-                    if (oggettiList.isEmpty() && oggettiSearch.getPage() > 0) {
+                    oggettiList = getQborrowManager().getMieiOggettiList(getOggettiSearch());
+                    if (oggettiList.isEmpty() && getOggettiSearch().getPage() > 0) {
                         if (log.isInfoEnabled()) {
-                            log.info("The request page " + oggettiSearch.getPage() + " was empty."
-                                + ((oggettiSearch.getPage() > 1) ? " Try with page " + (oggettiSearch.getPage() - 1) + "." : ""));
+                            log.info("The request page " + getOggettiSearch().getPage() + " was empty."
+                                + ((getOggettiSearch().getPage() > 1) ? " Try with page " + (getOggettiSearch().getPage() - 1) + "." : ""));
                         }
-                        oggettiSearch.setPage(oggettiSearch.getPage() - 1);
+                        getOggettiSearch().setPage(getOggettiSearch().getPage() - 1);
                     }
-                } while (0 < oggettiSearch.getPage() && oggettiList.isEmpty());
+                } while (0 < getOggettiSearch().getPage() && oggettiList.isEmpty());
             }
 
             // Compose the response
@@ -121,36 +122,6 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
         } catch (Exception e) {
             return manageException("Error on list Oggetti", e);
         }
-    }
-
-    private List<Oggetti> oggettiList = new ArrayList<Oggetti>();
-
-    // metodo per selezionare i soggetti con struts invece che nel modo normale
-    public String listMieiOggettiStruts() {
-
-        // if there are result
-        oggettiSearch = new OggettiSearch();
-        oggettiSearch.setPage(0);
-        oggettiSearch.setRowPerPage(10);
-        oggettiList = getQborrowManager().getOggettiList(oggettiSearch);
-        return "listMieiOggetti";
-
-    }
-
-    public OggettiSearch getOggettiSearch() {
-        return oggettiSearch;
-    }
-
-    public void setOggettiSearch(OggettiSearch oggettiSearch) {
-        this.oggettiSearch = oggettiSearch;
-    }
-
-    public List<Oggetti> getOggettiList() {
-        return oggettiList;
-    }
-
-    public void setOggettiList(List<Oggetti> oggettiList) {
-        this.oggettiList = oggettiList;
     }
 
 }

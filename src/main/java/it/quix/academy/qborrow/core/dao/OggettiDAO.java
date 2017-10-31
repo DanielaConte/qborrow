@@ -54,7 +54,8 @@ public class OggettiDAO extends OggettiAbstractDAO {
         try {
             // Compose the select query
             StringBuilder query = new StringBuilder(EOL);
-            query.append(" SELECT oggetti.*, prestiti.beneficiario, prestiti.scadenza_prestito, soggetti.nome, soggetti.cognome ").append(EOL);
+            query.append(" SELECT oggetti.*, prestiti.beneficiario, prestiti.data_prestito, prestiti.scadenza_prestito, soggetti.nome, soggetti.cognome ")
+                .append(EOL);
             query.append(" FROM oggetti ").append(EOL);
             query.append(" left join prestiti  on oggetti.id = prestiti.oggetto_prestato ").append(EOL);
             query.append(" left join soggetti on prestiti.beneficiario = soggetti.username ").append(EOL);
@@ -102,6 +103,7 @@ public class OggettiDAO extends OggettiAbstractDAO {
                 if (getParameterString(rs, "beneficiario") != null) {
                     oggetti.setOggettoPrestato(true);
                     Prestiti prestito = new Prestiti();
+                    prestito.setDataPrestito(getParameterDate(rs, "data_prestito"));
                     prestito.setScadenzaPrestito(getParameterDate(rs, "scadenza_prestito"));
 
                     Soggetti soggetto = new Soggetti();

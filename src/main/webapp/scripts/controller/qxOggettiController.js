@@ -48,8 +48,20 @@ qborrowApp.controller('qxOggettiController', ['$scope', 'qxQborrowHttpService', 
 	}
 	
 	$scope.edit = function(row){
-		$scope.infoPrestito = row.list.prestito;
+		
+		/*aggiunta */
+		if(row.prestito != null){
+			$scope.scopeController.selectedRow.prestito= {
+					prestatoA : row.prestito.soggetti.cognome + ' ' + row.prestito.soggetti.nome,
+					dataPrestito: row.prestito.dataPrestito,
+					scadenzaPrestito: row.prestito.scadenzaPrestito
+			};
+		}else {
+			$scope.scopeController={};
+		}
+		
 		$scope.scopeController.selectedRow = row;
+	
 		qxQborrowHttpService.editOggetti($scope.scopeController);
 	}
 	
@@ -89,6 +101,11 @@ qborrowApp.controller('qxOggettiController', ['$scope', 'qxQborrowHttpService', 
 	$scope.save = function(row){
 		qxQborrowHttpService.saveOggetti($scope.scopeController, $scope.forms.oggettiEditForm);
 	}
+	
+	$scope.saveUser = function(row){
+		qxQborrowHttpService.saveOggetti($scope.scopeController, $scope.forms.oggettiEditForm);
+	}
+	
 	
 	$scope.resetSearch = function () {
 		$scope.scopeController.search= {};

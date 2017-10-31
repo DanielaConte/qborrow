@@ -953,6 +953,7 @@ body {
 }
 .box-header.with-border {
   border-bottom: 1px solid #f4f4f4;
+  margin-top:20px;
 }
 .collapsed-box .box-header.with-border {
   border-bottom: none;

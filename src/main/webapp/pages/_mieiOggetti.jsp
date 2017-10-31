@@ -241,7 +241,7 @@
 					<td class="qtext-right">
 						<div class="qbtn-group" ng-hide="popup">
 		                  	<button class="qbtn btn-framework-color" ng-click="edit(row)" type="button"><i class="fa fa-pencil"></i>&nbsp;<s:text name="button.edit" /></button>
-		                  	<button class="qbtn btn-framework-color" ng-click="edit(row)" ng-if="row.oggettoPrestato == false" type="button"><i class="fa fa-plus"></i>&nbsp;<s:text name="button.newPrestito" /></button>
+		                  	<button class="qbtn btn-framework-color" ng-click="create()" ng-if="row.oggettoPrestato == false" type="button"><i class="fa fa-plus"></i>&nbsp;<s:text name="button.newPrestito" /></button>
 		                   	<button data-toggle="qdropdown" class="qbtn btn-framework-color qdropdown-toggle" type="button" aria-expanded="false"><i class="fa fa-trash" aria-hidden="true"></i>
 		                       	<span class="qcaret"></span>
 		                       	<span class="qsr-only"></span>

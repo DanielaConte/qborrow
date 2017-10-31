@@ -18,6 +18,7 @@ import org.zefer.pd4ml.PD4PageMark;
 import javax.annotation.Resource;
 
 import flexjson.JSONSerializer;
+import it.quix.framework.core.model.UserContext;
 import it.quix.framework.core.validation.InvalidConstraintImpl;
 import it.quix.framework.core.validation.api.InvalidConstraint;
 import it.quix.framework.core.validation.exception.ValidationException;
@@ -53,8 +54,6 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
      */
     private static Log log = LogFactory.getLog(OggettiManagerAction.class);
 
-    private OggettiSearch oggettiSearch = new OggettiSearch();
-
     /**
      * Pagine Lista Miei Oggetti
      * 
@@ -63,6 +62,22 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
     // questo serve per struts
     public String mieiOggetti() {
         return "mieiOggetti";
+    }
+
+    // salvataggio con proprietario che è l'utente loggato
+    public String saveUser() {
+        if (getOggetti() == null) {
+            // New Oggetti and all fields are empty. Create a new empty Oggetti to avoid NPE on validators.
+            setOggetti(new Oggetti());
+        }
+        try {
+            Oggetti oggetti = getQborrowManager().saveOggetti(getUserContext().getRealUserDn());
+            return manageOkMessage();
+        } catch (ValidationException e) {
+            return manageValidationError(e.getInvalidConstraints(), "save");
+        } catch (Exception e) {
+            return manageException("Error on save Oggetti", e);
+        }
     }
 
     /**

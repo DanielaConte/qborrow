@@ -525,6 +525,7 @@ public abstract class PrestitiAbstractDAO extends AbstractJDBCDAO {
             StringBuilder query = new StringBuilder(EOL);
             query.append("SELECT * FROM prestiti ").append(EOL);
             query.append("WHERE oggetto_prestato = ?  ").append(EOL);
+            query.append("ORDER BY data_prestito DESC  ").append(EOL);
             // Query logging
             if (queryLog.isInfoEnabled()) {
                 queryLog.info(query);

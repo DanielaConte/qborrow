@@ -201,7 +201,7 @@
 			</span>
 			<div class="qbtn-group" ng-hide="popup" ng-hide="popup">
                  <button class="qbtn btn-framework-color" ng-click="create()" type="button"><i class="fa fa-plus-circle"></i>&nbsp;<s:text name="button.new" /></button>
-                 <button data-toggle="qdropdown" class="qbtn btn-framework-color qdropdown-toggle" type="button" aria-expanded="false">
+                 <button data-toggle="qdropdown" class="qbtn btn-framework-color qdropdown-toggle" ng-click="create()" type="button" aria-expanded="false">
                    <span class="qcaret"></span>
                    <span class="qsr-only"></span>
                  </button>

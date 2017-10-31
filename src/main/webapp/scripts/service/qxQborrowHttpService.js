@@ -165,7 +165,7 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         };
         scopeController.promise = $http({ 
         		method: 'POST', 
-        		url: qborrowConfig.baseUrl + '/oggetti.action?task=saveOggettifUser&reset=true', 
+        		url: qborrowConfig.baseUrl + '/oggetti.action?task=saveOggettiUser&reset=true', 
         		data: quixParamSerializer(scopeController.selectedRow, 'oggetti.'), 
         		headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });

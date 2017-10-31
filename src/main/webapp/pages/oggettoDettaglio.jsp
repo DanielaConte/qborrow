@@ -180,7 +180,7 @@
 		</div>
 
 		<div class="box-footer qtext-center">
-			<button ng-click="saveUser()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
+			<button ng-click="saveOggettiUser()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
 			<button ng-click="back()" class="qbtn btn-framework-color"><i class="fa fa-arrow-circle-left"></i>&nbsp;<s:text name="button.back"/></button>
 		</div>
 	</div>

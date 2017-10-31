@@ -154,7 +154,7 @@ public class QborrowManager {
 
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
     public Oggetti saveOggettiWithUser(Oggetti oggetti) throws QborrowException, ValidationException {
-        return saveOggetti(oggetti, true);
+        return saveOggettiWithUser(oggetti, true);
     }
 
     /**
@@ -175,8 +175,9 @@ public class QborrowManager {
         }
         if (oggetti.getId() == null) {
             createOggetti(oggetti, validate);
-        } else {
-            updateOggetti(oggetti, validate);
+            if (oggetti.getPrestito().getSoggetti_username() != null) {
+                createPrestiti(oggetti.getPrestito(), validate);
+            }
         }
         return oggetti;
     }

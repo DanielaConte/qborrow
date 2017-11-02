@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
             // Get connection
             connection = getConnection();
             // Prepare the statement
-            statement = connection.prepareStatement(query.toString());
+            statement = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
             // set prePersist
             oggetti.prePersist(configuration);
             // Set the parameters
@@ -103,6 +104,10 @@ public abstract class OggettiAbstractDAO extends AbstractJDBCDAO {
                     log.warn(msg);
                 }
                 throw new DAOCreateException(msg);
+            }
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                oggetti.setId(rs.getInt(1));
             }
         } catch (SQLException ex) {
             String msg = "Unexpeted error on create Oggetti on database.";

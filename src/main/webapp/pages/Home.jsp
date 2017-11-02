@@ -23,8 +23,8 @@
 								<h1>Benvenuto, <s:property value="userContext.getUserText()" /></h1>
 							</div>
 							<div class="qrow">
-								<div class="qcol-sm-3">
-									<div class="buttonOggetti">
+								<div class="qcol-sm-3 buttons">
+									<div class="buttonsBody">
 										<i class="fa fa-futbol-o" aria-hidden="true"></i>
 										<p><s:a href="%{#oggettiUrl}">Oggetti</s:a></p>
 										<s:url id="prestitiUrl" action="prestiti" escapeAmp="false" includeParams="none">
@@ -33,9 +33,9 @@
 									</div>
 								</div>
 								
-								<div class="qcol-sm-3">
-									<div class="buttonPrestiti">
-										<i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+								<div class="qcol-sm-3 buttons">
+									<div class="buttonsBody">
+										<i class="fa fa-euro" aria-hidden="true"></i>
 									    <p><s:a href="%{#prestitiUrl}">Prestiti</s:a></p>
 										<s:url id="soggettiUrl" action="soggetti" escapeAmp="false" includeParams="none">
 											<s:param name="task">mainPage</s:param>
@@ -43,8 +43,8 @@
 									</div>
 								</div>
 								
-								<div class="qcol-sm-3">
-									<div class="buttonSoggetti">
+								<div class="qcol-sm-3 buttons">
+									<div class="buttonsBody">
 									<i class="fa fa-male" aria-hidden="true"></i>
 										<p><s:a href="%{#soggettiUrl}">Soggetti</s:a></p>					
 										<s:url id="frmkUrl" namespace="/framework" action="admin" escapeAmp="false" includeParams="none">
@@ -53,8 +53,8 @@
 						  			</div>
 								</div>
 										
-								<div class="qcol-sm-3">
-									<div class="buttonFramework">
+								<div class="qcol-sm-3 buttons">
+									<div class="buttonsBody">
 									<i class="fa fa-wrench" aria-hidden="true"></i>
 										<p><s:a href="%{#frmkUrlUrl}">Amministrazione</s:a></p>
 									</div>

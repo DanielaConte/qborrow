@@ -48,7 +48,8 @@ public class QborrowManager {
      * Returns the list of Oggetti that satisfy conditions passed in
      * oggettiSearch parameter
      * 
-     * @param oggettiSearch search model that contains the filters to use
+     * @param oggettiSearch
+     *            search model that contains the filters to use
      * @return returns the list of oggetti that satisfy conditions
      * @see OggettiSearch
      * @see Oggetti
@@ -60,9 +61,8 @@ public class QborrowManager {
     }
 
     /**
-     * Funzione per ottenere la list dei miei oggetti.
-     * Lo username viene settato nll'oggetto search dallo usercontext
-     * * @param oggettiSearch
+     * Funzione per ottenere la list dei miei oggetti. Lo username viene settato
+     * nll'oggetto search dallo usercontext * @param oggettiSearch
      * 
      * @return
      */
@@ -82,7 +82,8 @@ public class QborrowManager {
      * Returns the number of Oggetti that satisfy conditions passed in
      * oggettiSearch parameter
      * 
-     * @param oggettiSearch search model that contains the filters to use
+     * @param oggettiSearch
+     *            search model that contains the filters to use
      * @return the number of Oggetti found
      * @see OggettiSearch
      * @see Oggetti
@@ -100,10 +101,11 @@ public class QborrowManager {
     /**
      * retrieve from persistence system the required Oggetti record
      * 
-     * @param oggettiId the key to retrieve the oggetti
+     * @param oggettiId
+     *            the key to retrieve the oggetti
      * @return the requested Oggetti record
-     * @throws QborrowException if an unexpected exception occurs or no record
-     *             is found
+     * @throws QborrowException
+     *             if an unexpected exception occurs or no record is found
      * @see Oggetti
      */
     @Transactional(readOnly = true, rollbackFor = { QborrowException.class })
@@ -116,11 +118,13 @@ public class QborrowManager {
     /**
      * persist the passed Oggetti object to database, previous validation
      * 
-     * @param oggetti the object to save
+     * @param oggetti
+     *            the object to save
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -131,12 +135,15 @@ public class QborrowManager {
     /**
      * persist the passed Oggetti object to database
      * 
-     * @param oggetti the object to save
-     * @param validate false skip model validation
+     * @param oggetti
+     *            the object to save
+     * @param validate
+     *            false skip model validation
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -160,12 +167,15 @@ public class QborrowManager {
     /**
      * persist the passed Oggetti object to database
      * 
-     * @param oggetti the object to save
-     * @param validate false skip model validation
+     * @param oggetti
+     *            the object to save
+     * @param validate
+     *            false skip model validation
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -173,10 +183,23 @@ public class QborrowManager {
         if (validate) {
             validateOggetti(oggetti);
         }
-        if (oggetti.getId() == null) {
-            createOggetti(oggetti, validate);
-            if (oggetti.getPrestito().getSoggetti_username() != null) {
-                createPrestiti(oggetti.getPrestito(), validate);
+        if (oggetti.getId() == null) { // se l'oggetto non esiste già
+            createOggetti(oggetti, validate); // crea l'oggetto
+            if (oggetti.getPrestito().getSoggetti().getUsername() != null) { // se poi ho inserito nel form un beneficiario...
+                // le prossime due righe servono per settare dei valori che non vengono settati autonomamente
+                oggetti.getPrestito().setSoggetti_username(oggetti.getPrestito().getSoggetti().getUsername()); // username del beneficiario
+                oggetti.getPrestito().setOggetti_id(oggetti.getId()); // id dell'oggetto prestato
+                createPrestiti(oggetti.getPrestito(), validate); // ...crea anche il prestito
+            }
+        } else { // se l'oggetto esiste...
+            updateOggetti(oggetti);
+            if (oggetti.getPrestito().getOggetti_id() == null) { // ... ma non è presente nella tabella prestiti...
+                oggetti.getPrestito().setSoggetti_username(oggetti.getPrestito().getSoggetti().getUsername());
+                oggetti.getPrestito().setOggetti_id(oggetti.getId());
+                createPrestiti(oggetti.getPrestito()); // ...crea un nuovo prestito...
+            } else { // ...altrimenti se è già nella tabella prestiti...
+                oggetti.getPrestito().setSoggetti_username(oggetti.getPrestito().getSoggetti().getUsername());
+                updatePrestiti(oggetti.getPrestito()); // ...aggiorna il prestito
             }
         }
         return oggetti;
@@ -185,11 +208,13 @@ public class QborrowManager {
     /**
      * create the passed Oggetti object to database, previous validation
      * 
-     * @param oggetti the object to create
+     * @param oggetti
+     *            the object to create
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -200,12 +225,15 @@ public class QborrowManager {
     /**
      * create the passed Oggetti object to database
      * 
-     * @param oggetti the object to create
-     * @param validate false skip model validation
+     * @param oggetti
+     *            the object to create
+     * @param validate
+     *            false skip model validation
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -224,11 +252,13 @@ public class QborrowManager {
     /**
      * update the passed Oggetti object to database, previous validation
      * 
-     * @param oggetti the object to update
+     * @param oggetti
+     *            the object to update
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -239,12 +269,15 @@ public class QborrowManager {
     /**
      * update the passed Oggetti object to database
      * 
-     * @param oggetti the object to update
-     * @param validate false skip model validation
+     * @param oggetti
+     *            the object to update
+     * @param validate
+     *            false skip model validation
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -265,9 +298,10 @@ public class QborrowManager {
     /**
      * delete the Oggetti object from the database
      * 
-     * @param oggetti the object to delete
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
+     * @param oggetti
+     *            the object to delete
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
      * @see Oggetti
      */
     @Transactional(rollbackFor = { QborrowException.class })
@@ -282,9 +316,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected Oggetti
      *
-     * @param oggetti the object to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param oggetti
+     *            the object to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see Oggetti
      * @see it.quix.academy.qborrow.core.validation.OggettiValidator
      */
@@ -297,9 +334,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected search model OggettiSearch
      *
-     * @param oggettiSearch the search model to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param oggettiSearch
+     *            the search model to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see OggettiSearch
      * @see it.quix.academy.qborrow.core.validation.OggettiValidator
      */
@@ -313,7 +353,8 @@ public class QborrowManager {
      * Returns the list of Prestiti that satisfy conditions passed in
      * prestitiSearch parameter
      * 
-     * @param prestitiSearch search model that contains the filters to use
+     * @param prestitiSearch
+     *            search model that contains the filters to use
      * @return returns the list of prestiti that satisfy conditions
      * @see PrestitiSearch
      * @see Prestiti
@@ -340,7 +381,8 @@ public class QborrowManager {
      * Returns the number of Prestiti that satisfy conditions passed in
      * prestitiSearch parameter
      * 
-     * @param prestitiSearch search model that contains the filters to use
+     * @param prestitiSearch
+     *            search model that contains the filters to use
      * @return the number of Prestiti found
      * @see PrestitiSearch
      * @see Prestiti
@@ -353,10 +395,11 @@ public class QborrowManager {
     /**
      * retrieve from persistence system the required Prestiti record
      * 
-     * @param prestitiId the key to retrieve the prestiti
+     * @param prestitiId
+     *            the key to retrieve the prestiti
      * @return the requested Prestiti record
-     * @throws QborrowException if an unexpected exception occurs or no record
-     *             is found
+     * @throws QborrowException
+     *             if an unexpected exception occurs or no record is found
      * @see Prestiti
      */
     @Transactional(readOnly = true, rollbackFor = { QborrowException.class })
@@ -369,11 +412,13 @@ public class QborrowManager {
     /**
      * persist the passed Prestiti object to database, previous validation
      * 
-     * @param prestiti the object to save
+     * @param prestiti
+     *            the object to save
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -384,12 +429,15 @@ public class QborrowManager {
     /**
      * persist the passed Prestiti object to database
      * 
-     * @param prestiti the object to save
-     * @param validate false skip model validation
+     * @param prestiti
+     *            the object to save
+     * @param validate
+     *            false skip model validation
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -408,11 +456,13 @@ public class QborrowManager {
     /**
      * create the passed Prestiti object to database, previous validation
      * 
-     * @param prestiti the object to create
+     * @param prestiti
+     *            the object to create
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -423,12 +473,15 @@ public class QborrowManager {
     /**
      * create the passed Prestiti object to database
      * 
-     * @param prestiti the object to create
-     * @param validate false skip model validation
+     * @param prestiti
+     *            the object to create
+     * @param validate
+     *            false skip model validation
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -447,11 +500,13 @@ public class QborrowManager {
     /**
      * update the passed Prestiti object to database, previous validation
      * 
-     * @param prestiti the object to update
+     * @param prestiti
+     *            the object to update
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -462,12 +517,15 @@ public class QborrowManager {
     /**
      * update the passed Prestiti object to database
      * 
-     * @param prestiti the object to update
-     * @param validate false skip model validation
+     * @param prestiti
+     *            the object to update
+     * @param validate
+     *            false skip model validation
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -488,9 +546,10 @@ public class QborrowManager {
     /**
      * delete the Prestiti object from the database
      * 
-     * @param prestiti the object to delete
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
+     * @param prestiti
+     *            the object to delete
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
      * @see Prestiti
      */
     @Transactional(rollbackFor = { QborrowException.class })
@@ -505,9 +564,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected Prestiti
      *
-     * @param prestiti the object to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param prestiti
+     *            the object to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see Prestiti
      * @see it.quix.academy.qborrow.core.validation.PrestitiValidator
      */
@@ -520,9 +582,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected search model PrestitiSearch
      *
-     * @param prestitiSearch the search model to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param prestitiSearch
+     *            the search model to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see PrestitiSearch
      * @see it.quix.academy.qborrow.core.validation.PrestitiValidator
      */
@@ -536,7 +601,8 @@ public class QborrowManager {
      * Returns the list of Soggetti that satisfy conditions passed in
      * soggettiSearch parameter
      * 
-     * @param soggettiSearch search model that contains the filters to use
+     * @param soggettiSearch
+     *            search model that contains the filters to use
      * @return returns the list of soggetti that satisfy conditions
      * @see SoggettiSearch
      * @see Soggetti
@@ -551,7 +617,8 @@ public class QborrowManager {
      * Returns the number of Soggetti that satisfy conditions passed in
      * soggettiSearch parameter
      * 
-     * @param soggettiSearch search model that contains the filters to use
+     * @param soggettiSearch
+     *            search model that contains the filters to use
      * @return the number of Soggetti found
      * @see SoggettiSearch
      * @see Soggetti
@@ -564,10 +631,11 @@ public class QborrowManager {
     /**
      * retrieve from persistence system the required Soggetti record
      * 
-     * @param soggettiId the key to retrieve the soggetti
+     * @param soggettiId
+     *            the key to retrieve the soggetti
      * @return the requested Soggetti record
-     * @throws QborrowException if an unexpected exception occurs or no record
-     *             is found
+     * @throws QborrowException
+     *             if an unexpected exception occurs or no record is found
      * @see Soggetti
      */
     @Transactional(readOnly = true, rollbackFor = { QborrowException.class })
@@ -587,11 +655,13 @@ public class QborrowManager {
     /**
      * persist the passed Soggetti object to database, previous validation
      * 
-     * @param soggetti the object to save
+     * @param soggetti
+     *            the object to save
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -602,12 +672,15 @@ public class QborrowManager {
     /**
      * persist the passed Soggetti object to database
      * 
-     * @param soggetti the object to save
-     * @param validate false skip model validation
+     * @param soggetti
+     *            the object to save
+     * @param validate
+     *            false skip model validation
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -631,12 +704,15 @@ public class QborrowManager {
     /**
      * persist the passed Soggetti object to database
      * 
-     * @param soggetti the object to save
-     * @param validate false skip model validation
+     * @param soggetti
+     *            the object to save
+     * @param validate
+     *            false skip model validation
      * @return the persisted object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -660,12 +736,15 @@ public class QborrowManager {
     /**
      * update the passed Soggetti object to database
      * 
-     * @param soggetti the object to update
-     * @param validate false skip model validation
+     * @param soggetti
+     *            the object to update
+     * @param validate
+     *            false skip model validation
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -686,11 +765,13 @@ public class QborrowManager {
     /**
      * create the passed Soggetti object to database, previous validation
      * 
-     * @param soggetti the object to create
+     * @param soggetti
+     *            the object to create
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -701,12 +782,15 @@ public class QborrowManager {
     /**
      * create the passed Soggetti object to database
      * 
-     * @param soggetti the object to create
-     * @param validate false skip model validation
+     * @param soggetti
+     *            the object to create
+     * @param validate
+     *            false skip model validation
      * @return the created object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -725,11 +809,13 @@ public class QborrowManager {
     /**
      * update the passed Soggetti object to database, previous validation
      * 
-     * @param soggetti the object to update
+     * @param soggetti
+     *            the object to update
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -740,12 +826,15 @@ public class QborrowManager {
     /**
      * update the passed Soggetti object to database
      * 
-     * @param soggetti the object to update
-     * @param validate false skip model validation
+     * @param soggetti
+     *            the object to update
+     * @param validate
+     *            false skip model validation
      * @return the updated object
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
-     * @throws ValidationException if input data doesn't satisfy validation
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
+     * @throws ValidationException
+     *             if input data doesn't satisfy validation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class, ValidationException.class })
@@ -766,9 +855,10 @@ public class QborrowManager {
     /**
      * delete the Soggetti object from the database
      * 
-     * @param soggetti the object to delete
-     * @throws QborrowException if an unexpected exception occurs during
-     *             operation
+     * @param soggetti
+     *            the object to delete
+     * @throws QborrowException
+     *             if an unexpected exception occurs during operation
      * @see Soggetti
      */
     @Transactional(rollbackFor = { QborrowException.class })
@@ -783,9 +873,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected Soggetti
      *
-     * @param soggetti the object to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param soggetti
+     *            the object to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see Soggetti
      * @see it.quix.academy.qborrow.core.validation.SoggettiValidator
      */
@@ -798,9 +891,12 @@ public class QborrowManager {
     /**
      * performs the validation of the selected search model SoggettiSearch
      *
-     * @param soggettiSearch the search model to be validated
-     * @param groups group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
-     * @throws ValidationException if validation error occurs
+     * @param soggettiSearch
+     *            the search model to be validated
+     * @param groups
+     *            group name(s) targeted for validation (default to <code>[blank]</code> means all the validation will be done)
+     * @throws ValidationException
+     *             if validation error occurs
      * @see SoggettiSearch
      * @see it.quix.academy.qborrow.core.validation.SoggettiValidator
      */

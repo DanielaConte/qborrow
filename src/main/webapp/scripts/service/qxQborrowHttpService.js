@@ -160,7 +160,7 @@ var qxQborrowHttpService = function($http, qborrowConfig, $timeout) {
         		qxValidationError(data, form, $timeout, scopeController);
         	} else {
         		_getMieiOggettiList(scopeController, null);
-        		scopeController.selectedPage = 'edit';
+        		scopeController.selectedPage = 'list';
         	}
         };
         scopeController.promise = $http({ 

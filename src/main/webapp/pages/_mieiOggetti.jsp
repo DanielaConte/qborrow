@@ -267,7 +267,7 @@
 				first-text="&lt;" 
 				last-text="&gt;" 
 				rotate="false" 
-				ng-change="list()"
+				ng-change="listMieiOggetti()"
 				style="margin: 0px;"
 			/>
 		</div>

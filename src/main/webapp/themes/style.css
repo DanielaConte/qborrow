@@ -141,44 +141,33 @@ body h6 {
 	text-align: center;
 }
 
-.qcol-sm-3 .buttonOggetti {
-	border: 1px solid #efefef;
+.qcol-sm-3.buttons {
+    font-size: 25px;
+    border: 1px solid #efefef;
 	padding: 15px;
 	border-radius: 2px;
+	color: black;
 }
 
-.qcol-sm-3 .buttonSoggetti {
-	border: 1px solid #efefef;
-	padding: 15px;
-	border-radius: 2px;
+.qcol-sm-3.buttons:hover {
+    background: #d3d3d33d;
 }
 
-.qcol-sm-3 .buttonPrestiti {
-	border: 1px solid #efefef;
-	padding: 15px;
-	border-radius: 2px;
+.buttonsBody a {
+    color: black;
 }
 
-.qcol-sm-3 .buttonFramework {
-	border: 1px solid #efefef;
-	padding: 15px;
-	border-radius: 2px;
+.buttonsBody i {
+    font-size: 30px;
 }
 
-.qcol-sm-3 .buttonOggetti a{
-	color:black;
+.buttonsBody {
+    padding-top: 20px;
 }
 
-.qcol-sm-3 .buttonPrestiti a{
-	color:black;
-}
-
-.qcol-sm-3 .buttonSoggetti a{
-	color:black;
-}
-
-.qcol-sm-3 .buttonFramework a{
-	color:black;
+.imgMioProfilo {
+    align-items: center;
+    margin-top: 10%;
 }
 
 /*footer*/

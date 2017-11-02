@@ -203,10 +203,12 @@ public class OggettiAbstractManagerAction extends QborrowManagerAction {
         try {
             oggetti = getQborrowManager().getOggetti(oggetti.getId());
             List<Prestiti> listPrestito = getQborrowManager().getPrestitiListByOggetti(oggetti.getId());
-            Prestiti prestito = listPrestito.get(0); // il primo elemento suppongo sia il prestito più recente
+
             if (listPrestito.size() > 0) {
+                Prestiti prestito = listPrestito.get(0); // il primo elemento suppongo sia il prestito più recente
                 oggetti.setPrestito(prestito);
             }
+
             return manageSerialize(oggetti);
         } catch (Exception e) {
             return manageException("Error on edit Oggetti", e);

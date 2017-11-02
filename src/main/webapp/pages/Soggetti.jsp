@@ -23,12 +23,6 @@
   	<body ng-app="qborrow"> 
   		<div class="qcontainer-fluid"> <!-- m -->
   			<jsp:include page="_header.jsp" />
-	  		<div class="frameworkRow"  >
-		  		<div class="frameworkLeftMenuCell">
-					<jsp:include page="_left.jsp">
-						<jsp:param name="menuActive" value="soggetti"/>
-					</jsp:include>
-				</div>
   				<div class="frameworkMainCell" ng-controller="qxSoggettiController" ng-include="scopeController.selectedPage">
 					
   				</div>
@@ -37,7 +31,6 @@
 				<script type="text/ng-template" id="Oggetti"><jsp:include page="_oggetti.jsp" /></script>
 				<script type="text/ng-template" id="Prestiti"><jsp:include page="_prestiti.jsp" /></script>
 				<script type="text/ng-template" id="Soggetti"><jsp:include page="_soggetti.jsp" /></script>				
-			</div>
   		 	<jsp:include page="_footer.jsp" />
 	  	</div>	
   	</body>

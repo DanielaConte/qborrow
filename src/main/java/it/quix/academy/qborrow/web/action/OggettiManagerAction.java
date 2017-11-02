@@ -1,5 +1,6 @@
 package it.quix.academy.qborrow.web.action;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +73,9 @@ public class OggettiManagerAction extends OggettiAbstractManagerAction {
         }
         try {
             getOggetti().setSoggetti_username(userContext.getRealUserDn());
+
+            Date data = new Date();
+            getOggetti().setDataUltimaModifica(data);
             getQborrowManager().saveOggettiWithUser(getOggetti());
             return manageOkMessage();
         } catch (ValidationException e) {

@@ -25,20 +25,14 @@
   	<body  ng-app="qborrow">
   	  		<div class="qcontainer-fluid"> <!-- m -->
   			<jsp:include page="_header.jsp" />
-	  		<div class="frameworkRow"  >
-		  		<div class="frameworkLeftMenuCell">
-					<jsp:include page="_left.jsp">
-						<jsp:param name="menuActive" value="soggetti"/>
-					</jsp:include>
-				</div>
-  				<div class="frameworkMainCell" >
-					
+  				<div class="frameworkMainCell" >	
 				<form name="forms.userEditForm" ng-controller="qxSoggettiController" ng-init="editUser();">
 							<div class="box box-framework" >
 								<div class="box-header with-border">
 									<h3 class="qh3 box-title">My Page</h3>
 								</div>
 								<div class="box-body">
+								<div class="qcol-md-4">
 									<div class="qrow">		
 										<div class="qcol-md-6 qcol-sm-6 qcol-xs-12" ng-class="{'qhas-error': forms.userEditForm.email.$invalid}" >
 											<label for="mail"><s:text name="soggetti.edit.email"/>*</label>
@@ -103,32 +97,35 @@
 										</div>
 								</div>
 								
-								<div class="qrow">		
-										<div class="qcol-md-6 qcol-sm-6 qcol-xs-12" ng-class="{'qhas-error': forms.userEditForm.immagine.$invalid}">
-											<label for="immagine"><s:text name="soggetti.edit.immagine"/></label>
-											<input type="text" 
-												ng-model="scopeController.selectedRow.immagine" 
-												id="immagine" 
-												name="immagine"
-												class="qform-control" 
-												/>
-												<img ng-src="{{scopeController.selectedRow.immagine}}" width="300" length="300"/>
-										</div>		
-								</div>	
-										
-									</div>
-							</div>
-						</form>
-						
+									<div class="qrow">		
+											<div class="qcol-md-6 qcol-sm-6 qcol-xs-12" ng-class="{'qhas-error': forms.userEditForm.immagine.$invalid}">
+												<label for="immagine"><s:text name="soggetti.edit.immagine"/></label>
+												<input type="text" 
+													ng-model="scopeController.selectedRow.immagine" 
+													id="immagine" 
+													name="immagine"
+													class="qform-control" 
+													/>
+											</div>		
+									</div>	
+						</div>
+					
+							<div class="qcol-md-4">
+									<div class="qrow">		
+												<img class="imgMioProfilo" ng-src="{{scopeController.selectedRow.immagine}}" width="300" length="300"/>
+									</div>	
+							</div>	
+						</div>			
+					</div>
+				</form>
+			</div>
+	</div>					
+						<div class="qrow">
 								<div class="box-footer qtext-center">
 									<button ng-click="saveUser()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
 									<button ng-click="back()" class="qbtn btn-framework-color"><i class="fa fa-arrow-circle-left"></i>&nbsp;<s:text name="button.back"/></button>
 								</div>
-					</div>
-  				</div>
-			
-			</div>
+						</div>
   		 	<jsp:include page="_footer.jsp" />
-	  	</div>	
   	</body>
 </html>

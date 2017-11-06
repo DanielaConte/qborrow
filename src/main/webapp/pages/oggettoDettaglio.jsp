@@ -121,13 +121,16 @@
 			<div class="qrow">	
 				<div class="qcol-md-4" ng-class="{'qhas-error': forms.oggettiEditForm.beneficiario.$invalid}">
 					<label for="beneficiario"><s:text name="oggetti.edit.soggetti"/></label>
-					<select 
-						ng-init="loadCombo('soggetti')" 
+					<input 
+						ng-init="loadCombo('soggetti')"
+						type="text"
+						ng-model="scopeController.selectedRow.prestito.soggetti"
+						typeahead-min-length="3"
+						typeahead="soggetti as soggetti.username for soggetti in scopeController.soggettiList |filter:$viewValue| limitTo:6"
 						id="soggetti"
 						name="soggetti"
-						ng-model="scopeController.selectedRow.prestito.soggetti"
-						ng-options="option as option.username for option in scopeController.soggettiList"
 						class="qform-control"/>
+						
 					<div ng-messages="forms.oggettiEditForm.immagine.$error" role="alert">
 					  	<div ng-message="notNull"><s:text name="error.notNull"/></div>
 					  	<div ng-message="invalidAK"><s:text name="error.invalidAK"/></div>

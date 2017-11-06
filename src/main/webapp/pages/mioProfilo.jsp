@@ -108,6 +108,13 @@
 													/>
 											</div>		
 									</div>	
+									
+								<div class="qrow">
+									<div class="box-footer qtext-center">
+										<button ng-click="saveUser()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
+										<button ng-click="back()" class="qbtn btn-framework-color"><i class="fa fa-arrow-circle-left"></i>&nbsp;<s:text name="button.back"/></button>
+									</div>
+							</div>
 						</div>
 					
 							<div class="qcol-md-4">
@@ -115,17 +122,13 @@
 												<img class="imgMioProfilo" ng-src="{{scopeController.selectedRow.immagine}}" width="300" length="300"/>
 									</div>	
 							</div>	
+							
 						</div>			
 					</div>
 				</form>
 			</div>
 	</div>					
-						<div class="qrow">
-								<div class="box-footer qtext-center">
-									<button ng-click="saveUser()" class="qbtn btn-framework-color"><i class="fa fa-floppy-o"></i>&nbsp;<s:text name="button.save"/></button>
-									<button ng-click="back()" class="qbtn btn-framework-color"><i class="fa fa-arrow-circle-left"></i>&nbsp;<s:text name="button.back"/></button>
-								</div>
-						</div>
+						
   		 	<jsp:include page="_footer.jsp" />
   	</body>
 </html>

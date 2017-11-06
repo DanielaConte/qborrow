@@ -126,8 +126,8 @@ public abstract class PrestitiAbstractDAO extends AbstractJDBCDAO {
             // Compose the update query
             StringBuilder query = new StringBuilder(EOL);
             query.append(" UPDATE prestiti SET ").append(EOL);
-            query.append(" data_prestito = ? , scadenza_prestito = ? , oggetto_prestato = ?  ").append(EOL);
-            query.append("  WHERE beneficiario = ? ").append(EOL);
+            query.append(" data_prestito = ? , scadenza_prestito = ?   ").append(EOL);
+            query.append("  WHERE  oggetto_prestato = ? and beneficiario = ? ").append(EOL);
 
             // Query logging
             if (queryLog.isInfoEnabled()) {
@@ -145,9 +145,10 @@ public abstract class PrestitiAbstractDAO extends AbstractJDBCDAO {
             int p = 1;
             super.setParameterDate(statement, p++, prestiti.getDataPrestito());
             super.setParameterDate(statement, p++, prestiti.getScadenzaPrestito());
-            super.setParameterInteger(statement, p++, prestiti.getOggetti_id());
 
             // Set the primary key
+            super.setParameterInteger(statement, p++, prestiti.getOggetti_id());
+
             super.setParameterString(statement, p++, prestiti.getSoggetti_username());
 
             // Execute the query
